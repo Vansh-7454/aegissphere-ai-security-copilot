@@ -22,3 +22,6 @@ backend/uploads/
 
 # Test output
 backend/test_output/
+
+# Audit Reports
+FINAL_AUDIT_REPORT.md
