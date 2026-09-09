@@ -1,0 +1,24 @@
+{
+  "watch": [
+    "src/server.js",
+    "src/controllers",
+    "src/models",
+    "src/routes",
+    "src/services",
+    "src/agents",
+    "src/middleware",
+    "src/config"
+  ],
+  "ext": "js",
+  "ignore": [
+    "src/tests/**",
+    "src/uploads/**",
+    "uploads/**",
+    "*.log",
+    "*.tmp",
+    "*.json",
+    "*.csv",
+    "*.txt"
+  ],
+  "delay": "2000"
+}

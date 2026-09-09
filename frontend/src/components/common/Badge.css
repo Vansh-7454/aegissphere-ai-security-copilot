@@ -1,0 +1,75 @@
+/* =========================================================
+   AEGISPHERE BADGE SYSTEM (ROUNDED PILLS)
+   ========================================================= */
+
+.aegis-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  line-height: 1;
+  text-transform: capitalize;
+  letter-spacing: 0.01em;
+}
+
+.aegis-badge-sm {
+  font-size: 10.5px;
+  padding: 3px 8px;
+}
+
+.aegis-badge-md {
+  font-size: 11.5px;
+  padding: 4px 11px;
+}
+
+.aegis-badge-default {
+  background: #E2EEFE;
+  border-color: #BFDBFE;
+  color: var(--text-secondary);
+}
+
+.aegis-badge-critical {
+  background: var(--status-critical-bg);
+  border-color: var(--status-critical-border);
+  color: var(--status-critical);
+}
+
+.aegis-badge-high {
+  background: var(--status-high-bg);
+  border-color: var(--status-high-border);
+  color: var(--status-high);
+}
+
+.aegis-badge-medium {
+  background: var(--status-medium-bg);
+  border-color: var(--status-medium-border);
+  color: var(--status-medium);
+}
+
+.aegis-badge-low {
+  background: var(--status-low-bg);
+  border-color: var(--status-low-border);
+  color: var(--status-low);
+}
+
+.aegis-badge-success {
+  background: var(--status-success-bg);
+  border-color: var(--status-success-border);
+  color: var(--status-success);
+}
+
+.aegis-badge-info {
+  background: var(--status-info-bg);
+  border-color: var(--status-info-border);
+  color: var(--status-info);
+}
+
+.aegis-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}

@@ -1,0 +1,87 @@
+/* =========================================================
+   AEGISPHERE LIGHT THEME FORM INPUT STYLES
+   ========================================================= */
+
+.aegis-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.aegis-input-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-heading);
+  letter-spacing: 0.01em;
+}
+
+.aegis-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.aegis-input-field {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 13.5px;
+  font-family: var(--font-sans);
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.aegis-input-field:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(108, 77, 246, 0.15);
+}
+
+.aegis-input-field::placeholder {
+  color: var(--text-muted);
+}
+
+.aegis-input-field:disabled {
+  background: #F1F5F9;
+  color: var(--text-muted);
+  cursor: not-allowed;
+  border-color: #E2E8F0;
+}
+
+.aegis-input-has-left {
+  padding-left: 38px;
+}
+
+.aegis-input-has-right {
+  padding-right: 38px;
+}
+
+.aegis-input-icon-left,
+.aegis-input-icon-right {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.aegis-input-icon-left {
+  left: 12px;
+}
+
+.aegis-input-icon-right {
+  right: 12px;
+}
+
+.aegis-input-error-msg {
+  font-size: 11.5px;
+  color: var(--status-critical);
+  margin-top: 2px;
+}

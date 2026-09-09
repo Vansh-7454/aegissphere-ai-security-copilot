@@ -1,0 +1,316 @@
+/* =========================================================
+   AEGISPHERE MODERN PASTEL-BLUE & WARM-CREAM DESIGN SYSTEM
+   Warm Almond/Cream Canvas (#FAF6F0) + Pastel Sky-Blue Surfaces (#DBEAFE / #E2EEFE)
+   Brand Accents: Royal Blue (#2563EB), Vibrant Electric Blue (#0084FF), Purple Shield (#6366F1)
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+:root {
+  /* Surface & Background System */
+  --bg-main: #FAF6F0;
+  --bg-surface: #FFFFFF;
+  --bg-card: #DBEAFE;
+  --bg-card-soft: #E2EEFE;
+  --bg-card-hover: #D0E4FD;
+  --bg-card-elevated: #FFFFFF;
+  --bg-secondary: #F3ECE2;
+  --bg-subtle: #F8F3EC;
+  --bg-input: #E4EFFD;
+  --bg-input-focus: #FFFFFF;
+  
+  /* Sidebar Dark Theme */
+  --bg-sidebar-dark: #0B132B;
+  --bg-sidebar-dark-hover: #162244;
+  --bg-sidebar-dark-active: #2563EB;
+  --text-sidebar-muted: #94A3B8;
+  --text-sidebar-active: #FFFFFF;
+
+  /* Borders & Dividers */
+  --border-subtle: #E8DFD3;
+  --border-card: #C7DEFA;
+  --border-card-soft: rgba(37, 99, 235, 0.12);
+  --border-card-hover: #93C5FD;
+  --border-focus: #2563EB;
+  --border-accent: rgba(37, 99, 235, 0.35);
+
+  /* Typography Colors */
+  --text-primary: #1E293B;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --text-heading: #0F172A;
+  --text-accent-blue: #2563EB;
+  --text-accent-cyan: #0284C7;
+  --text-accent-purple: #6366F1;
+  --text-inverse: #FFFFFF;
+
+  /* Brand Accents */
+  --accent-primary: #2563EB;
+  --accent-primary-hover: #1D4ED8;
+  --accent-blue: #2563EB;
+  --accent-blue-vibrant: #0084FF;
+  --accent-blue-deep: #1E40AF;
+  --accent-purple: #6366F1;
+  --accent-violet: #7C3AED;
+  --accent-indigo: #4F46E5;
+  --accent-cyan: #0284C7;
+  --accent-cyan-bright: #38BDF8;
+  --accent-tint: #EDE9FE;
+  --accent-tint-blue: #DBEAFE;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #2563EB 0%, #0084FF 100%);
+  --gradient-blue-purple: linear-gradient(135deg, #6366F1 0%, #2563EB 50%, #0084FF 100%);
+  --gradient-vibrant: linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #06B6D4 100%);
+  --gradient-card-soft: linear-gradient(180deg, #E2EEFE 0%, #DBEAFE 100%);
+  --gradient-text: linear-gradient(135deg, #1E293B 0%, #2563EB 100%);
+  --gradient-brand: linear-gradient(135deg, #4F46E5 0%, #2563EB 100%);
+
+  /* Semantic Status Indicators */
+  --status-critical: #DC2626;
+  --status-critical-bg: #FEE2E2;
+  --status-critical-border: #FECACA;
+
+  --status-high: #EA580C;
+  --status-high-bg: #FFEDD5;
+  --status-high-border: #FED7AA;
+
+  --status-medium: #D97706;
+  --status-medium-bg: #FEF3C7;
+  --status-medium-border: #FDE68A;
+
+  --status-low: #2563EB;
+  --status-low-bg: #DBEAFE;
+  --status-low-border: #BFDBFE;
+
+  --status-success: #15803D;
+  --status-success-bg: #DCFCE7;
+  --status-success-border: #BBF7D0;
+
+  --status-info: #6366F1;
+  --status-info-bg: #EDE9FE;
+  --status-info-border: #DDD6FE;
+
+  /* Typography Families */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', var(--font-sans);
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Sizing & Radius */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-pill: 9999px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-card: 0 2px 6px rgba(37, 99, 235, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+  --shadow-card-hover: 0 8px 20px rgba(37, 99, 235, 0.08);
+  --shadow-btn: 0 3px 10px rgba(37, 99, 235, 0.28);
+  --shadow-btn-hover: 0 6px 16px rgba(37, 99, 235, 0.38);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-heading);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+h1 { font-size: 28px; font-weight: 800; }
+h2 { font-size: 22px; font-weight: 700; }
+h3 { font-size: 16px; font-weight: 700; }
+h4 { font-size: 14px; font-weight: 600; }
+
+p {
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-primary-hover);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Common Layout Utilities */
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-1 { gap: 4px; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
+.gap-6 { gap: 24px; }
+.w-full { width: 100%; }
+
+/* Two-tone Header Text Helper */
+.text-accent-blue {
+  color: var(--accent-blue);
+}
+
+/* Standard Pastel Card */
+.card-enterprise {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card-soft);
+  border-radius: var(--radius-xl);
+  padding: 22px;
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.card-enterprise:hover {
+  border-color: var(--border-card-hover);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+/* Semantic Status Badges & Pills */
+.badge-critical {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--status-critical-bg);
+  border: 1px solid var(--status-critical-border);
+  color: var(--status-critical);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+}
+
+.badge-high {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--status-high-bg);
+  border: 1px solid var(--status-high-border);
+  color: var(--status-high);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+}
+
+.badge-medium {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--status-medium-bg);
+  border: 1px solid var(--status-medium-border);
+  color: var(--status-medium);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+}
+
+.badge-low {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--status-low-bg);
+  border: 1px solid var(--status-low-border);
+  color: var(--status-low);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+}
+
+.badge-success {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--status-success-bg);
+  border: 1px solid var(--status-success-border);
+  color: var(--status-success);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+}
+
+.badge-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--status-info-bg);
+  border: 1px solid var(--status-info-border);
+  color: var(--status-info);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+}

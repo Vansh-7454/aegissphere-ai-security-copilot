@@ -1,0 +1,24 @@
+# Node Modules
+**/node_modules
+
+# Environment Files
+**/.env
+
+# Logs
+*.log
+
+# Build
+dist
+build
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode
+# Uploaded files
+backend/uploads/
+
+# Test output
+backend/test_output/

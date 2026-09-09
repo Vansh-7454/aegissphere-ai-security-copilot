@@ -1,0 +1,48 @@
+/* =========================================================
+   AEGISPHERE PASTEL CARD STYLES
+   Pastel Sky-Blue Surfaces (#DBEAFE) + Rounded Corners
+   ========================================================= */
+
+.aegis-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card-soft);
+  border-radius: var(--radius-xl);
+  position: relative;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-card);
+}
+
+.aegis-card-interactive {
+  cursor: pointer;
+}
+
+.aegis-card-interactive:hover {
+  border-color: var(--border-card-hover);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.aegis-card-pad-sm { padding: 14px; }
+.aegis-card-pad-md { padding: 20px; }
+.aegis-card-pad-lg { padding: 26px; }
+
+.aegis-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.aegis-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.01em;
+}
+
+.aegis-card-subtitle {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}

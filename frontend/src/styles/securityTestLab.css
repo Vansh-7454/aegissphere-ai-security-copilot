@@ -1,0 +1,170 @@
+/* =========================================================
+   AEGISPHERE PASTEL BLUE SECURITY TEST LAB STYLES
+   ========================================================= */
+
+.testlab-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.testlab-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .testlab-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.testlab-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card-soft);
+  border-radius: var(--radius-2xl);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: var(--shadow-card);
+}
+
+.testlab-card-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-heading);
+  margin: 0;
+}
+
+.testlab-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.testlab-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.testlab-select {
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+  font-size: 13.5px;
+  outline: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.testlab-select:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.testlab-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(191, 219, 254, 0.6);
+  font-size: 13px;
+}
+
+.testlab-info-row span {
+  color: var(--text-secondary);
+}
+
+.testlab-info-row strong {
+  color: var(--text-heading);
+}
+
+/* Result Box */
+.testlab-result-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card-soft);
+  border-radius: var(--radius-2xl);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 360px;
+  box-shadow: var(--shadow-card);
+}
+
+.testlab-result-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 260px;
+  text-align: center;
+  gap: 12px;
+  color: var(--text-muted);
+}
+
+.testlab-result-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #DCFCE7;
+  border: 1px solid #BBF7D0;
+  border-radius: var(--radius-pill);
+  color: #15803D;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.testlab-result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.testlab-result-cell {
+  background: #FFFFFF;
+  border: 1px solid #BFDBFE;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.testlab-result-cell span {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.testlab-result-cell strong {
+  font-size: 13.5px;
+  color: var(--text-heading);
+}
+
+.testlab-notice-box {
+  background: #E2EEFE;
+  border: 1px solid #BFDBFE;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #1E40AF;
+  line-height: 1.55;
+}
