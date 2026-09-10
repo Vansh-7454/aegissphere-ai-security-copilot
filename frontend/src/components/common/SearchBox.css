@@ -1,5 +1,5 @@
 /* =========================================================
-   AEGISPHERE LIGHT THEME SEARCH BOX STYLES
+   AEGISPHERE LIGHT SEARCH BOX STYLES
    ========================================================= */
 
 .aegis-search-box {
@@ -10,16 +10,16 @@
   background: #FFFFFF;
   border: 1px solid var(--border-card);
   border-radius: var(--radius-md);
-  padding: 0 10px;
+  padding: 0 12px;
   gap: 8px;
   color: var(--text-muted);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
 }
 
 .aegis-search-box:focus-within {
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(108, 77, 246, 0.12);
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.18);
   color: var(--accent-primary);
 }
 
@@ -35,14 +35,14 @@
 }
 
 .aegis-search-input::placeholder {
-  color: var(--text-muted);
+  color: #94A3B8;
 }
 
 .aegis-search-kbd {
   font-size: 10.5px;
   font-family: var(--font-mono);
   background: #F1F5F9;
-  border: 1px solid #E2E8F0;
+  border: 1px solid #CBD5E1;
   border-radius: 4px;
   padding: 2px 5px;
   color: var(--text-muted);

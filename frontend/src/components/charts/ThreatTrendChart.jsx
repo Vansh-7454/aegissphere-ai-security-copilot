@@ -10,7 +10,7 @@ import {
 } from 'recharts';
 
 export const ThreatTrendChart = ({ data = [] }) => {
-  // Real 7-day 0 baseline if data is not yet loaded
+  // Real 7-day baseline
   const chartData = data && data.length > 0 ? data : [
     { time: 'Day 1', low: 0, medium: 0, high: 0, critical: 0, threats: 0 },
     { time: 'Day 2', low: 0, medium: 0, high: 0, critical: 0, threats: 0 },
@@ -25,59 +25,55 @@ export const ThreatTrendChart = ({ data = [] }) => {
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
         <defs>
-          <linearGradient id="purpleWave" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#8B5CF6" stopOpacity={0.45} />
-            <stop offset="100%" stopColor="#8B5CF6" stopOpacity={0.02} />
+          <linearGradient id="tealWave" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#0D9488" stopOpacity={0.4} />
+            <stop offset="100%" stopColor="#0D9488" stopOpacity={0.0} />
           </linearGradient>
-          <linearGradient id="blueWave" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#38BDF8" stopOpacity={0.4} />
-            <stop offset="100%" stopColor="#38BDF8" stopOpacity={0.0} />
-          </linearGradient>
-          <linearGradient id="coralWave" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#F43F5E" stopOpacity={0.3} />
-            <stop offset="100%" stopColor="#F43F5E" stopOpacity={0.0} />
+          <linearGradient id="cyanWave" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#06B6D4" stopOpacity={0.3} />
+            <stop offset="100%" stopColor="#06B6D4" stopOpacity={0.0} />
           </linearGradient>
         </defs>
-        <CartesianGrid strokeDasharray="3 3" stroke="#CBD5E1" vertical={false} opacity={0.6} />
+        <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" vertical={false} />
         <XAxis
           dataKey="time"
           stroke="#64748B"
           fontSize={11}
           tickLine={false}
-          axisLine={{ stroke: '#CBD5E1' }}
+          axisLine={{ stroke: '#E2E8F0' }}
         />
         <YAxis
           stroke="#64748B"
           fontSize={11}
           tickLine={false}
-          axisLine={{ stroke: '#CBD5E1' }}
+          axisLine={{ stroke: '#E2E8F0' }}
           allowDecimals={false}
         />
         <Tooltip
           contentStyle={{
             backgroundColor: '#FFFFFF',
-            borderColor: '#BFDBFE',
+            border: '1px solid rgba(20, 184, 166, 0.25)',
             borderRadius: '12px',
             fontSize: '12px',
             color: '#0F172A',
-            boxShadow: '0 8px 20px rgba(37, 99, 235, 0.12)',
+            boxShadow: '0 8px 24px rgba(13, 148, 136, 0.12)',
           }}
         />
         <Area
           type="monotone"
           dataKey="threats"
           name="Threat Activity"
-          stroke="#6366F1"
+          stroke="#0D9488"
           strokeWidth={3}
-          fill="url(#purpleWave)"
+          fill="url(#tealWave)"
         />
         <Area
           type="monotone"
           dataKey="medium"
           name="Medium Risk"
-          stroke="#38BDF8"
+          stroke="#06B6D4"
           strokeWidth={2}
-          fill="url(#blueWave)"
+          fill="url(#cyanWave)"
         />
       </AreaChart>
     </ResponsiveContainer>

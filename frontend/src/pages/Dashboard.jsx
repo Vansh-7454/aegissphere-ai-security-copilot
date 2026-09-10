@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import {
   Shield,
   ShieldAlert,
@@ -17,6 +18,9 @@ import {
   FolderOpen,
   FlaskConical,
   FileCheck2,
+  FileText,
+  BrainCircuit,
+  Search,
 } from 'lucide-react';
 
 import api from '../services/api';
@@ -29,6 +33,7 @@ import LoadingSpinner from '../components/common/LoadingSpinner';
 import '../styles/dashboard.css';
 
 const Dashboard = () => {
+  const { user } = useAuth();
   const [stats, setStats] = useState({
     totalLogs: 0,
     totalThreats: 0,
@@ -107,31 +112,96 @@ const Dashboard = () => {
   return (
     <Layout>
       <div className="soc-container">
-        {/* Page Header */}
-        <div className="soc-page-header">
-          <div>
-            <h1 className="soc-page-title" style={{ fontSize: '24px', margin: 0 }}>
-              Command Center Overview
+        {/* Top Hero Welcome Section (Light Blue Gradient Card) */}
+        <div className="dashboard-hero-card">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', zIndex: 2 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+              <span className="soc-status-indicator">
+                <span className="soc-status-dot" />
+                <span className="soc-status-label">System Active</span>
+              </span>
+              <span style={{ fontSize: '12px', color: 'var(--accent-primary)', fontWeight: 700, background: '#FFFFFF', padding: '3px 10px', borderRadius: '9999px', border: '1px solid var(--border-card)' }}>
+                4-Stage Agent Mesh Ready
+              </span>
+            </div>
+
+            <h1 className="dashboard-hero-title">
+              Welcome back, {user?.name || 'Security Analyst'}
             </h1>
-            <p className="soc-page-subtitle" style={{ fontSize: '13px', margin: '2px 0 0 0', color: '#64748B' }}>
-              Real-time security log monitoring, heuristic threat detection, and telemetry status.
+            <p className="dashboard-hero-desc">
+              AegisSphere centralizes server log ingestion, rule-based heuristic threat detection, MITRE ATT&CK correlation, and audit telemetry.
             </p>
           </div>
 
-          <div className="soc-actions-group">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0, zIndex: 2 }}>
             <button
               onClick={loadDashboard}
               disabled={loading}
-              className="aegis-btn aegis-btn-secondary aegis-btn-sm"
+              className="aegis-btn aegis-btn-secondary aegis-btn-md"
             >
-              <RefreshCw size={13} className={loading ? 'aegis-btn-spinner' : ''} />
-              Refresh
+              <RefreshCw size={14} className={loading ? 'aegis-btn-spinner' : ''} />
+              Refresh Telemetry
             </button>
-            <Link to="/logs" className="aegis-btn aegis-btn-primary aegis-btn-sm">
-              <Upload size={13} />
+            <Link to="/logs" className="aegis-btn aegis-btn-primary aegis-btn-md">
+              <Upload size={14} />
               Upload Logs
             </Link>
           </div>
+        </div>
+
+        {/* 4 Feature Quick Cards (Log Analysis, Threat Detection, Threat Forensics, Agent Coordinator) */}
+        <div className="dashboard-features-grid">
+          <Link to="/logs" className="dashboard-feature-card">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div className="dashboard-feature-icon">
+                <FileText size={20} />
+              </div>
+              <ArrowRight size={15} style={{ color: 'var(--accent-primary)' }} />
+            </div>
+            <div>
+              <h3 className="dashboard-feature-title">Log Analysis</h3>
+              <p className="dashboard-feature-desc">Upload & parse .log, .txt, .csv, and .json telemetry events.</p>
+            </div>
+          </Link>
+
+          <Link to="/security-test" className="dashboard-feature-card">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div className="dashboard-feature-icon" style={{ background: '#EDE9FE', borderColor: '#DDD6FE', color: '#6366F1' }}>
+                <FlaskConical size={20} />
+              </div>
+              <ArrowRight size={15} style={{ color: '#6366F1' }} />
+            </div>
+            <div>
+              <h3 className="dashboard-feature-title">Threat Detection</h3>
+              <p className="dashboard-feature-desc">Test detection algorithms against SQLi, XSS, and brute force.</p>
+            </div>
+          </Link>
+
+          <Link to="/threats" className="dashboard-feature-card">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div className="dashboard-feature-icon" style={{ background: '#FEE2E2', borderColor: '#FECACA', color: '#DC2626' }}>
+                <ShieldAlert size={20} />
+              </div>
+              <ArrowRight size={15} style={{ color: '#DC2626' }} />
+            </div>
+            <div>
+              <h3 className="dashboard-feature-title">Threat Forensics</h3>
+              <p className="dashboard-feature-desc">Inspect matched signatures, confidence scores, and source IPs.</p>
+            </div>
+          </Link>
+
+          <Link to="/agents" className="dashboard-feature-card">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div className="dashboard-feature-icon" style={{ background: '#DCFCE7', borderColor: '#BBF7D0', color: '#15803D' }}>
+                <Cpu size={20} />
+              </div>
+              <ArrowRight size={15} style={{ color: '#15803D' }} />
+            </div>
+            <div>
+              <h3 className="dashboard-feature-title">Agent Coordinator</h3>
+              <p className="dashboard-feature-desc">Monitor the synchronized 4-stage multi-agent pipeline.</p>
+            </div>
+          </Link>
         </div>
 
         {/* 4 Real KPI Metric Cards */}
@@ -163,65 +233,6 @@ const Dashboard = () => {
             variant="default"
             subtext="Active response tickets"
           />
-        </div>
-
-        {/* Quick Actions Navigation Section */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px' }}>
-          <Link
-            to="/logs"
-            className="aegis-card aegis-card-interactive aegis-card-pad-sm"
-            style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
-          >
-            <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#DBEAFE', color: '#2563EB', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Upload size={18} />
-            </div>
-            <div>
-              <strong style={{ fontSize: '13.5px', color: 'var(--text-heading)', display: 'block' }}>Upload Logs</strong>
-              <span style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>Ingest .log, .txt, .csv, .json</span>
-            </div>
-          </Link>
-
-          <Link
-            to="/threats"
-            className="aegis-card aegis-card-interactive aegis-card-pad-sm"
-            style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
-          >
-            <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#FEE2E2', color: '#DC2626', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <ShieldAlert size={18} />
-            </div>
-            <div>
-              <strong style={{ fontSize: '13.5px', color: 'var(--text-heading)', display: 'block' }}>Investigate Threats</strong>
-              <span style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>Review forensics & MITRE tags</span>
-            </div>
-          </Link>
-
-          <Link
-            to="/security-test"
-            className="aegis-card aegis-card-interactive aegis-card-pad-sm"
-            style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
-          >
-            <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#EDE9FE', color: '#6366F1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <FlaskConical size={18} />
-            </div>
-            <div>
-              <strong style={{ fontSize: '13.5px', color: 'var(--text-heading)', display: 'block' }}>Run Security Test</strong>
-              <span style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>Simulate controlled attack tests</span>
-            </div>
-          </Link>
-
-          <Link
-            to="/reports"
-            className="aegis-card aegis-card-interactive aegis-card-pad-sm"
-            style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
-          >
-            <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#E0F2FE', color: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <FileCheck2 size={18} />
-            </div>
-            <div>
-              <strong style={{ fontSize: '13.5px', color: 'var(--text-heading)', display: 'block' }}>View Reports</strong>
-              <span style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>Audit summaries & exports</span>
-            </div>
-          </Link>
         </div>
 
         {/* Threats Overview Chart & Recent Activity Feed */}

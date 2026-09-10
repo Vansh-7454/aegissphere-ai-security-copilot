@@ -1,72 +1,79 @@
 /* =========================================================
-   AEGISPHERE MODERN PASTEL-BLUE & WARM-CREAM DESIGN SYSTEM
-   Warm Almond/Cream Canvas (#FAF6F0) + Pastel Sky-Blue Surfaces (#DBEAFE / #E2EEFE)
-   Brand Accents: Royal Blue (#2563EB), Vibrant Electric Blue (#0084FF), Purple Shield (#6366F1)
+   AEGISPHERE MODERN LIGHT-BLUE SAAS DESIGN SYSTEM
+   Clean Off-White / Cyan-Tinted Canvas (#F8FCFE)
+   Pale Blue Gradients + Soft Elevated Cards + Sapphire Accents
    ========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
 :root {
-  /* Surface & Background System */
-  --bg-main: #FAF6F0;
+  /* Canvas & Surface System - Light Blue SaaS Theme */
+  --bg-main: #F8FCFE;
   --bg-surface: #FFFFFF;
-  --bg-card: #DBEAFE;
-  --bg-card-soft: #E2EEFE;
-  --bg-card-hover: #D0E4FD;
-  --bg-card-elevated: #FFFFFF;
-  --bg-secondary: #F3ECE2;
-  --bg-subtle: #F8F3EC;
-  --bg-input: #E4EFFD;
+  --bg-card: #FFFFFF;
+  --bg-card-soft: #F0F9FF;
+  --bg-card-hover: #F8FCFF;
+  --bg-card-elevated: #EBF5FB;
+  --bg-card-gradient: linear-gradient(135deg, #FFFFFF 0%, #F0F9FF 100%);
+  --bg-secondary: #F1F5F9;
+  --bg-subtle: rgba(2, 132, 199, 0.04);
+  --bg-input: #FFFFFF;
   --bg-input-focus: #FFFFFF;
   
-  /* Sidebar Dark Theme */
-  --bg-sidebar-dark: #0B132B;
-  --bg-sidebar-dark-hover: #162244;
-  --bg-sidebar-dark-active: #2563EB;
-  --text-sidebar-muted: #94A3B8;
-  --text-sidebar-active: #FFFFFF;
+  /* Sidebar Light Glass Theme */
+  --bg-sidebar: #FFFFFF;
+  --bg-sidebar-hover: rgba(2, 132, 199, 0.06);
+  --bg-sidebar-active: #E0F2FE;
+  --text-sidebar-muted: #64748B;
+  --text-sidebar-active: #0284C7;
 
   /* Borders & Dividers */
-  --border-subtle: #E8DFD3;
-  --border-card: #C7DEFA;
-  --border-card-soft: rgba(37, 99, 235, 0.12);
-  --border-card-hover: #93C5FD;
-  --border-focus: #2563EB;
-  --border-accent: rgba(37, 99, 235, 0.35);
+  --border-subtle: rgba(226, 232, 240, 0.8);
+  --border-card: rgba(186, 230, 253, 0.75);
+  --border-card-soft: rgba(224, 242, 254, 0.9);
+  --border-card-hover: rgba(2, 132, 199, 0.4);
+  --border-focus: #0284C7;
+  --border-accent: rgba(6, 182, 212, 0.4);
 
-  /* Typography Colors */
-  --text-primary: #1E293B;
+  /* Typography Colors (Dark Navy & Slate) */
+  --text-primary: #0F172A;
   --text-secondary: #475569;
   --text-muted: #64748B;
   --text-heading: #0F172A;
-  --text-accent-blue: #2563EB;
+  --text-canvas-heading: #0F172A;
+  --text-canvas-sub: #475569;
+  --text-accent-blue: #0284C7;
+  --text-accent-teal: #0D9488;
+  --text-accent-mint: #0F766E;
   --text-accent-cyan: #0284C7;
-  --text-accent-purple: #6366F1;
+  --text-accent-purple: #4F46E5;
+  --text-accent-gold: #B45309;
   --text-inverse: #FFFFFF;
 
   /* Brand Accents */
-  --accent-primary: #2563EB;
-  --accent-primary-hover: #1D4ED8;
-  --accent-blue: #2563EB;
-  --accent-blue-vibrant: #0084FF;
-  --accent-blue-deep: #1E40AF;
+  --accent-primary: #0284C7;
+  --accent-primary-hover: #0369A1;
+  --accent-blue: #0284C7;
+  --accent-blue-vibrant: #0284C7;
+  --accent-blue-deep: #0369A1;
+  --accent-cyan: #06B6D4;
+  --accent-cyan-bright: #0891B2;
+  --accent-teal: #0D9488;
+  --accent-teal-deep: #0F766E;
+  --accent-mint: #14B8A6;
   --accent-purple: #6366F1;
-  --accent-violet: #7C3AED;
-  --accent-indigo: #4F46E5;
-  --accent-cyan: #0284C7;
-  --accent-cyan-bright: #38BDF8;
-  --accent-tint: #EDE9FE;
-  --accent-tint-blue: #DBEAFE;
+  --accent-tint: #E0F2FE;
+  --accent-tint-blue: rgba(2, 132, 199, 0.08);
+  --accent-tint-cyan: rgba(6, 182, 212, 0.08);
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #2563EB 0%, #0084FF 100%);
-  --gradient-blue-purple: linear-gradient(135deg, #6366F1 0%, #2563EB 50%, #0084FF 100%);
-  --gradient-vibrant: linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #06B6D4 100%);
-  --gradient-card-soft: linear-gradient(180deg, #E2EEFE 0%, #DBEAFE 100%);
-  --gradient-text: linear-gradient(135deg, #1E293B 0%, #2563EB 100%);
-  --gradient-brand: linear-gradient(135deg, #4F46E5 0%, #2563EB 100%);
+  --gradient-primary: linear-gradient(135deg, #0284C7 0%, #06B6D4 100%);
+  --gradient-hero: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 50%, #F0F9FF 100%);
+  --gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 249, 255, 0.85) 100%);
+  --gradient-card-soft: linear-gradient(180deg, #FFFFFF 0%, #F0F9FF 100%);
+  --gradient-brand: linear-gradient(135deg, #0284C7 0%, #06B6D4 100%);
 
-  /* Semantic Status Indicators */
+  /* Semantic Status Indicators (Real security states only) */
   --status-critical: #DC2626;
   --status-critical-bg: #FEE2E2;
   --status-critical-border: #FECACA;
@@ -79,17 +86,17 @@
   --status-medium-bg: #FEF3C7;
   --status-medium-border: #FDE68A;
 
-  --status-low: #2563EB;
-  --status-low-bg: #DBEAFE;
-  --status-low-border: #BFDBFE;
+  --status-low: #0284C7;
+  --status-low-bg: #E0F2FE;
+  --status-low-border: #BAE6FD;
 
   --status-success: #15803D;
   --status-success-bg: #DCFCE7;
   --status-success-border: #BBF7D0;
 
-  --status-info: #6366F1;
-  --status-info-bg: #EDE9FE;
-  --status-info-border: #DDD6FE;
+  --status-info: #0284C7;
+  --status-info-bg: #E0F2FE;
+  --status-info-border: #BAE6FD;
 
   /* Typography Families */
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -101,19 +108,19 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
+  --radius-xl: 18px;
+  --radius-2xl: 22px;
   --radius-pill: 9999px;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
-  --shadow-card: 0 2px 6px rgba(37, 99, 235, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
-  --shadow-card-hover: 0 8px 20px rgba(37, 99, 235, 0.08);
-  --shadow-btn: 0 3px 10px rgba(37, 99, 235, 0.28);
-  --shadow-btn-hover: 0 6px 16px rgba(37, 99, 235, 0.38);
+  /* Soft SaaS Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 12px -2px rgba(14, 116, 144, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 24px -4px rgba(14, 116, 144, 0.06), 0 4px 8px -2px rgba(0, 0, 0, 0.02);
+  --shadow-card: 0 4px 20px -2px rgba(14, 116, 144, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-card-hover: 0 12px 28px -4px rgba(2, 132, 199, 0.12), 0 4px 8px -1px rgba(0, 0, 0, 0.04);
+  --shadow-btn: 0 2px 8px rgba(2, 132, 199, 0.25);
+  --shadow-btn-hover: 0 4px 14px rgba(2, 132, 199, 0.35);
 
   /* Transitions */
   --transition-fast: 0.15s ease;
@@ -141,6 +148,11 @@ html {
 
 body {
   background-color: var(--bg-main);
+  background-image: 
+    radial-gradient(circle at 12% 8%, rgba(224, 242, 254, 0.65) 0%, transparent 45%),
+    radial-gradient(circle at 88% 14%, rgba(186, 230, 253, 0.45) 0%, transparent 45%),
+    radial-gradient(circle at 50% 88%, rgba(240, 249, 255, 0.6) 0%, transparent 55%);
+  background-attachment: fixed;
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
@@ -187,12 +199,12 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: rgba(2, 132, 199, 0.25);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: rgba(2, 132, 199, 0.45);
 }
 
 /* Common Layout Utilities */
@@ -208,17 +220,12 @@ a:hover {
 .gap-6 { gap: 24px; }
 .w-full { width: 100%; }
 
-/* Two-tone Header Text Helper */
-.text-accent-blue {
-  color: var(--accent-blue);
-}
-
-/* Standard Pastel Card */
+/* Light SaaS Card Class */
 .card-enterprise {
   background: var(--bg-card);
-  border: 1px solid var(--border-card-soft);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-xl);
-  padding: 22px;
+  padding: 24px 26px;
   box-shadow: var(--shadow-card);
   transition: all var(--transition-normal);
   position: relative;
@@ -228,6 +235,18 @@ a:hover {
   border-color: var(--border-card-hover);
   box-shadow: var(--shadow-card-hover);
   transform: translateY(-2px);
+}
+
+/* Light Blue Hero Feature Banner */
+.light-gradient-hero {
+  background: var(--gradient-hero);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-2xl);
+  padding: 32px 36px;
+  color: #0F172A;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
 }
 
 /* Semantic Status Badges & Pills */
@@ -314,3 +333,4 @@ a:hover {
   font-weight: 700;
   font-family: var(--font-sans);
 }
+

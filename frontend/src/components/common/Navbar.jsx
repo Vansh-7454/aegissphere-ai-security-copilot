@@ -1,28 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { Search, Bell, Clock, User, Shield } from 'lucide-react';
+import { Search, Bell, User, Shield } from 'lucide-react';
 import '../../styles/dashboard.css';
 
 const Navbar = () => {
   const { user } = useAuth();
-  const [currentTime, setCurrentTime] = useState('');
-
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date();
-      setCurrentTime(
-        now.toLocaleTimeString([], {
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false,
-        }) + ' UTC'
-      );
-    };
-    updateClock();
-    const interval = setInterval(updateClock, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const getInitials = (name) => {
     if (!name) return 'OP';
@@ -37,11 +19,6 @@ const Navbar = () => {
         <div className="soc-status-indicator" title="Threat Detection Engine Status">
           <span className="soc-status-dot"></span>
           <span className="soc-status-label">System Active</span>
-        </div>
-
-        <div className="soc-utc-clock">
-          <Clock size={13} />
-          <span>{currentTime || '00:00:00 UTC'}</span>
         </div>
       </div>
 

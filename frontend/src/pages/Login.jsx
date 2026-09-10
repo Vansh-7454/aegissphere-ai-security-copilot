@@ -70,24 +70,24 @@ const Login = () => {
               A centralized dashboard to upload server logs, detect suspicious patterns, and review threat forensics.
             </p>
 
-            <div className="auth-feature-list">
-              <div className="auth-feature-row">
-                <CheckCircle2 size={16} style={{ color: '#15803D', flexShrink: 0 }} />
-                <span>Multi-format security log ingestion (.log, .txt, .csv, .json)</span>
+              <div className="auth-feature-list">
+                <div className="auth-feature-row">
+                  <CheckCircle2 size={16} style={{ color: '#0284C7' }} />
+                  <span>Multi-format security log ingestion (.log, .txt, .csv, .json)</span>
+                </div>
+                <div className="auth-feature-row">
+                  <CheckCircle2 size={16} style={{ color: '#0284C7' }} />
+                  <span>Rule-based detection for SQLi, brute force, and port scans</span>
+                </div>
+                <div className="auth-feature-row">
+                  <CheckCircle2 size={16} style={{ color: '#0284C7' }} />
+                  <span>MITRE ATT&CK framework mapping & forensics</span>
+                </div>
               </div>
-              <div className="auth-feature-row">
-                <CheckCircle2 size={16} style={{ color: '#15803D', flexShrink: 0 }} />
-                <span>Rule-based detection for SQLi, brute force, and port scans</span>
-              </div>
-              <div className="auth-feature-row">
-                <CheckCircle2 size={16} style={{ color: '#15803D', flexShrink: 0 }} />
-                <span>MITRE ATT&CK framework mapping & forensics</span>
-              </div>
-            </div>
           </div>
 
           <div className="auth-showcase-footer">
-            AegisSphere · College Final-Year Project
+            <span>AegisSphere · AI Security Operations Platform</span>
           </div>
         </div>
 

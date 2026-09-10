@@ -4,8 +4,7 @@ import api, { downloadReportPdf } from '../services/api';
 import Layout from '../components/common/Layout';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import EmptyState from '../components/common/EmptyState';
-import Badge from '../components/common/Badge';
-import { Download, FileCheck, ShieldAlert, AlertTriangle } from 'lucide-react';
+import { Download, FileCheck, AlertTriangle } from 'lucide-react';
 import '../styles/dashboard.css';
 
 const SOCReports = () => {
@@ -100,12 +99,12 @@ const SOCReports = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span
               style={{
-                background: '#E2EEFE',
-                color: '#1E40AF',
-                border: '1px solid #BFDBFE',
-                padding: '4px 12px',
+                background: '#E0F2FE',
+                color: '#0284C7',
+                border: '1px solid #BAE6FD',
+                padding: '4px 14px',
                 borderRadius: '9999px',
-                fontSize: '11px',
+                fontSize: '11.5px',
                 fontWeight: 700,
               }}
             >
@@ -120,7 +119,7 @@ const SOCReports = () => {
             style={{
               padding: '12px 16px',
               marginBottom: '16px',
-              borderRadius: '8px',
+              borderRadius: '10px',
               background: '#FEE2E2',
               border: '1px solid #FCA5A5',
               color: '#991B1B',
@@ -152,37 +151,38 @@ const SOCReports = () => {
               const isDownloading = downloadingId === report._id;
               return (
                 <div key={report._id} className="soc-stat-card" style={{ padding: '24px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-                    <span style={{ fontSize: '11px', color: '#2563EB', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                    <span style={{ fontSize: '11px', color: '#0284C7', fontFamily: 'var(--font-mono)', fontWeight: 800 }}>
                       SOC AUDIT REPORT
                     </span>
-                    <span style={{ fontSize: '11px', color: '#64748B' }}>
+                    <span style={{ fontSize: '11.5px', color: '#64748B' }}>
                       {report.createdAt ? new Date(report.createdAt).toLocaleDateString() : 'Recent'}
                     </span>
                   </div>
 
-                  <h3 style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-heading)', margin: '0 0 8px 0' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A', margin: '0 0 8px 0' }}>
                     {report.title}
                   </h3>
 
-                  <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '1.5', margin: '0 0 16px 0' }}>
+                  <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '1.55', margin: '0 0 16px 0' }}>
                     {report.summary || 'Authoritative security audit log and threat classification summary.'}
                   </p>
 
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '12px', borderTop: '1px solid #BFDBFE' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '14px', borderTop: '1px solid rgba(186, 230, 253, 0.65)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <span style={{ fontSize: '12px', fontWeight: 600, color: '#0F172A' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 700, color: '#0F172A' }}>
                         {report.threatCount || 0} Correlated Threat{report.threatCount === 1 ? '' : 's'}
                       </span>
                       {report.criticalCount > 0 && (
                         <span
                           style={{
-                            fontSize: '10px',
+                            fontSize: '10.5px',
                             fontWeight: 700,
                             color: '#DC2626',
                             background: '#FEE2E2',
-                            padding: '2px 6px',
-                            borderRadius: '4px',
+                            padding: '2px 8px',
+                            borderRadius: '9999px',
+                            border: '1px solid #FECACA',
                           }}
                         >
                           {report.criticalCount} Critical

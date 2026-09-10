@@ -1,11 +1,10 @@
 /* =========================================================
-   AEGISPHERE PASTEL CARD STYLES
-   Pastel Sky-Blue Surfaces (#DBEAFE) + Rounded Corners
+   AEGISPHERE MODERN LIGHT SAAS CARD STYLES
    ========================================================= */
 
 .aegis-card {
   background: var(--bg-card);
-  border: 1px solid var(--border-card-soft);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-xl);
   position: relative;
   transition: all var(--transition-normal);
@@ -22,9 +21,9 @@
   transform: translateY(-2px);
 }
 
-.aegis-card-pad-sm { padding: 14px; }
-.aegis-card-pad-md { padding: 20px; }
-.aegis-card-pad-lg { padding: 26px; }
+.aegis-card-pad-sm { padding: 14px 16px; }
+.aegis-card-pad-md { padding: 20px 22px; }
+.aegis-card-pad-lg { padding: 26px 28px; }
 
 .aegis-card-header {
   display: flex;

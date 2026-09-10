@@ -1,15 +1,16 @@
 /* =========================================================
-   AEGISPHERE LIGHT THEME STATUS CHIP STYLES
+   AEGISPHERE STATUS CHIP STYLES
+   Clean Modern Light-Blue SaaS Styling
    ========================================================= */
 
 .aegis-status-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 2px 8px;
-  border-radius: var(--radius-xs);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   font-family: var(--font-mono);
   border: 1px solid transparent;
   line-height: 1.2;
@@ -44,7 +45,7 @@
 .aegis-status-monitoring,
 .aegis-status-ready,
 .aegis-status-idle {
-  background: #F1F5F9;
-  border-color: #E2E8F0;
-  color: var(--text-secondary);
+  background: #F0F9FF;
+  border-color: #BAE6FD;
+  color: #0284C7;
 }

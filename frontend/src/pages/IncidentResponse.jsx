@@ -7,16 +7,10 @@ import {
   ShieldCheck,
   CheckCircle2,
   Trash2,
-  Clock,
   History,
   Search,
-  Filter,
-  UserCheck,
   ChevronDown,
   ChevronUp,
-  FileEdit,
-  PlusCircle,
-  X,
 } from 'lucide-react';
 import Badge from '../components/common/Badge';
 import EmptyState from '../components/common/EmptyState';
@@ -33,8 +27,6 @@ const IncidentResponse = () => {
   const [severityFilter, setSeverityFilter] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [expandedHistory, setExpandedHistory] = useState({});
-  const [activeActionModal, setActiveActionModal] = useState(null); // incidentId
-  const [actionForm, setActionForm] = useState({ action: '', notes: '' });
 
   const fetchIncidents = async () => {
     try {
@@ -56,39 +48,6 @@ const IncidentResponse = () => {
 
   const toggleHistory = (id) => {
     setExpandedHistory((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
-
-  const handleRecordAction = async (incidentId, displayId, actionName, actionNotes = '') => {
-    if (!actionName || !actionName.trim()) {
-      alert('Please enter an action name or select a response preset.');
-      return;
-    }
-
-    try {
-      setActionLoading(incidentId);
-      const res = await api.post(`/incidents/${incidentId}/actions`, {
-        action: actionName.trim(),
-        notes: actionNotes.trim() || `Response action [${actionName.trim()}] recorded by SOC analyst.`,
-      });
-
-      if (res.data?.incident) {
-        setIncidents((prev) =>
-          prev.map((inc) => (inc._id === incidentId ? res.data.incident : inc))
-        );
-      }
-
-      setNotification(`[ACTION RECORDED] "${actionName.trim()}" logged for incident ${displayId}.`);
-      setActiveActionModal(null);
-      setActionForm({ action: '', notes: '' });
-      setTimeout(() => {
-        setNotification(null);
-      }, 4000);
-    } catch (err) {
-      console.error('Error recording response action:', err);
-      alert(err.response?.data?.message || 'Failed to record response action.');
-    } finally {
-      setActionLoading(null);
-    }
   };
 
   const handleStatusChange = async (incidentId, newStatus) => {
@@ -233,6 +192,7 @@ const IncidentResponse = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
+              boxShadow: '0 2px 8px rgba(21, 128, 61, 0.1)',
             }}
           >
             <CheckCircle2 size={16} />
@@ -243,15 +203,16 @@ const IncidentResponse = () => {
         {/* Filter & Search Bar */}
         <div
           style={{
-            background: 'var(--bg-card)',
-            border: '1px solid var(--border-card-soft)',
+            background: '#FFFFFF',
+            border: '1px solid rgba(186, 230, 253, 0.75)',
             borderRadius: 'var(--radius-xl)',
-            padding: '14px 18px',
+            padding: '14px 20px',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             flexWrap: 'wrap',
             gap: '12px',
+            boxShadow: '0 4px 16px rgba(15, 23, 42, 0.03)',
           }}
         >
           {/* Status Tabs */}
@@ -261,7 +222,7 @@ const IncidentResponse = () => {
                 key={st}
                 onClick={() => setStatusFilter(st)}
                 className={`forensics-filter-btn ${statusFilter === st ? 'active' : ''}`}
-                style={{ fontSize: '11.5px', padding: '4px 12px' }}
+                style={{ fontSize: '11.5px', padding: '5px 14px' }}
               >
                 {st}
               </button>
@@ -273,8 +234,17 @@ const IncidentResponse = () => {
             <select
               value={severityFilter}
               onChange={(e) => setSeverityFilter(e.target.value)}
-              className="testlab-select"
-              style={{ width: '130px', height: '34px', fontSize: '12px' }}
+              className="soc-search-input"
+              style={{
+                width: '130px',
+                height: '36px',
+                fontSize: '12px',
+                padding: '0 12px',
+                borderRadius: '9999px',
+                border: '1px solid rgba(186, 230, 253, 0.85)',
+                background: '#FFFFFF',
+                color: 'var(--text-primary)',
+              }}
             >
               <option value="All">All Severity</option>
               <option value="Critical">Critical</option>
@@ -283,23 +253,23 @@ const IncidentResponse = () => {
               <option value="Low">Low</option>
             </select>
 
-            <div style={{ position: 'relative', width: '220px' }}>
-              <Search size={14} style={{ position: 'absolute', left: '10px', top: '10px', color: '#94A3B8' }} />
+            <div className="soc-search-container" style={{ width: '220px' }}>
+              <Search size={14} className="soc-search-icon" />
               <input
                 type="text"
                 placeholder="Search incidents..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="aegis-input-field"
-                style={{ paddingLeft: '32px', height: '34px', fontSize: '12px' }}
+                className="soc-search-input"
+                style={{ height: '36px', fontSize: '12px' }}
               />
             </div>
           </div>
         </div>
 
         {/* Real Response & Audit Mode Banner */}
-        <div style={{ background: '#EFF6FF', border: '1px solid #BFDBFE', padding: '10px 14px', borderRadius: '10px', fontSize: '12px', color: '#1E40AF', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <ShieldCheck size={16} style={{ color: '#2563EB', flexShrink: 0 }} />
+        <div style={{ background: '#EFF6FF', border: '1px solid #BFDBFE', padding: '12px 16px', borderRadius: '12px', fontSize: '12.5px', color: '#1E40AF', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <ShieldCheck size={18} style={{ color: '#0284C7', flexShrink: 0 }} />
           <span>
             <strong>SOC Response & Audit Mode:</strong> Record operator triage actions, update ticket lifecycle status, and maintain immutable audit history for verified threats.
           </span>
@@ -329,14 +299,13 @@ const IncidentResponse = () => {
               const asset = inc.logId?.originalName || inc.logId?.filename || 'Security Telemetry Host';
               const isMitigated = inc.status === 'Mitigated' || inc.status === 'Closed' || inc.status === 'Resolved';
               const isHistoryOpen = expandedHistory[inc._id];
-              const isActionOpen = activeActionModal === inc._id;
 
               return (
-                <div key={inc._id} className="soc-table-card" style={{ padding: '22px' }}>
+                <div key={inc._id} className="soc-table-card" style={{ padding: '24px' }}>
                   {/* Card Header */}
                   <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#2563EB', fontWeight: 700 }}>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#0284C7', fontWeight: 800 }}>
                         {displayId}
                       </span>
                       <Badge variant={getSeverityVariant(inc.severity)}>{inc.severity}</Badge>
@@ -350,7 +319,7 @@ const IncidentResponse = () => {
                           background: isMitigated ? '#DCFCE7' : '#FEE2E2',
                           color: isMitigated ? '#15803D' : '#DC2626',
                           border: isMitigated ? '1px solid #BBF7D0' : '1px solid #FECACA',
-                          padding: '2px 8px',
+                          padding: '3px 10px',
                           borderRadius: '9999px',
                           fontSize: '11px',
                           fontWeight: 700,
@@ -386,17 +355,17 @@ const IncidentResponse = () => {
                           alignItems: 'center',
                         }}
                       >
-                        <Trash2 size={14} style={{ color: '#EF4444' }} />
+                        <Trash2 size={15} style={{ color: '#EF4444' }} />
                       </button>
                     </div>
                   </div>
 
                   {/* Title & Description */}
-                  <h3 style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-heading)', margin: '8px 0 4px 0' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A', margin: '10px 0 6px 0', wordBreak: 'break-word', overflowWrap: 'anywhere' }}>
                     {inc.title}
                   </h3>
                   {inc.description && (
-                    <p style={{ fontSize: '12.5px', color: 'var(--text-secondary)', margin: '0 0 8px 0', lineHeight: '1.5' }}>
+                    <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: '0 0 10px 0', lineHeight: '1.55', wordBreak: 'break-word', overflowWrap: 'anywhere' }}>
                       {inc.description}
                     </p>
                   )}
@@ -406,159 +375,68 @@ const IncidentResponse = () => {
                     style={{
                       display: 'grid',
                       gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                      gap: '10px',
-                      margin: '12px 0',
+                      gap: '12px',
+                      margin: '14px 0',
                     }}
                   >
-                    <div style={{ background: '#FFFFFF', padding: '10px 12px', borderRadius: '8px', border: '1px solid #BFDBFE' }}>
-                      <span style={{ fontSize: '10.5px', color: '#64748B', display: 'block', textTransform: 'uppercase', fontWeight: 600 }}>Source IP</span>
-                      <strong style={{ fontSize: '12.5px', fontFamily: 'var(--font-mono)', color: '#2563EB' }}>{sourceIp}</strong>
+                    <div style={{ background: '#F8FCFE', padding: '12px 14px', borderRadius: '10px', border: '1px solid rgba(186, 230, 253, 0.75)', minWidth: 0, overflow: 'hidden' }}>
+                      <span style={{ fontSize: '10.5px', color: '#0284C7', display: 'block', textTransform: 'uppercase', fontWeight: 700, fontFamily: 'var(--font-mono)', marginBottom: '4px' }}>Source IP</span>
+                      <strong style={{ fontSize: '13px', fontFamily: 'var(--font-mono)', color: '#0284C7', wordBreak: 'break-all', overflowWrap: 'anywhere', whiteSpace: 'normal', display: 'block', lineHeight: '1.4' }}>{sourceIp}</strong>
                     </div>
 
-                    <div style={{ background: '#FFFFFF', padding: '10px 12px', borderRadius: '8px', border: '1px solid #BFDBFE' }}>
-                      <span style={{ fontSize: '10.5px', color: '#64748B', display: 'block', textTransform: 'uppercase', fontWeight: 600 }}>Attack Vector / MITRE</span>
-                      <strong style={{ fontSize: '12.5px', color: '#0F172A' }}>{vector}</strong>
+                    <div style={{ background: '#F8FCFE', padding: '12px 14px', borderRadius: '10px', border: '1px solid rgba(186, 230, 253, 0.75)', minWidth: 0, overflow: 'hidden' }}>
+                      <span style={{ fontSize: '10.5px', color: '#0284C7', display: 'block', textTransform: 'uppercase', fontWeight: 700, fontFamily: 'var(--font-mono)', marginBottom: '4px' }}>Attack Vector / MITRE</span>
+                      <strong style={{ fontSize: '13px', color: '#0F172A', wordBreak: 'break-word', overflowWrap: 'anywhere', whiteSpace: 'normal', display: 'block', lineHeight: '1.4' }}>{vector}</strong>
                     </div>
 
-                    <div style={{ background: '#FFFFFF', padding: '10px 12px', borderRadius: '8px', border: '1px solid #BFDBFE' }}>
-                      <span style={{ fontSize: '10.5px', color: '#64748B', display: 'block', textTransform: 'uppercase', fontWeight: 600 }}>Associated Log Asset</span>
-                      <strong style={{ fontSize: '12.5px', color: '#0F172A' }}>{asset}</strong>
+                    <div style={{ background: '#F8FCFE', padding: '12px 14px', borderRadius: '10px', border: '1px solid rgba(186, 230, 253, 0.75)', minWidth: 0, overflow: 'hidden' }}>
+                      <span style={{ fontSize: '10.5px', color: '#0284C7', display: 'block', textTransform: 'uppercase', fontWeight: 700, fontFamily: 'var(--font-mono)', marginBottom: '4px' }}>Associated Log Asset</span>
+                      <strong style={{ fontSize: '13px', color: '#0F172A', wordBreak: 'break-all', overflowWrap: 'anywhere', whiteSpace: 'normal', display: 'block', lineHeight: '1.4' }}>{asset}</strong>
                     </div>
 
-                    <div style={{ background: '#FFFFFF', padding: '10px 12px', borderRadius: '8px', border: '1px solid #BFDBFE' }}>
-                      <span style={{ fontSize: '10.5px', color: '#64748B', display: 'block', textTransform: 'uppercase', fontWeight: 600 }}>Assigned Operator</span>
-                      <strong style={{ fontSize: '12.5px', color: '#0F172A' }}>
+                    <div style={{ background: '#F8FCFE', padding: '12px 14px', borderRadius: '10px', border: '1px solid rgba(186, 230, 253, 0.75)', minWidth: 0, overflow: 'hidden' }}>
+                      <span style={{ fontSize: '10.5px', color: '#0284C7', display: 'block', textTransform: 'uppercase', fontWeight: 700, fontFamily: 'var(--font-mono)', marginBottom: '4px' }}>Assigned Operator</span>
+                      <strong style={{ fontSize: '13px', color: '#0F172A', wordBreak: 'break-word', overflowWrap: 'anywhere', whiteSpace: 'normal', display: 'block', lineHeight: '1.4' }}>
                         {inc.assignedTo ? (typeof inc.assignedTo === 'object' ? inc.assignedTo.name || inc.assignedTo.email : 'Assigned') : 'Unassigned'}
                       </strong>
                     </div>
                   </div>
 
-                  {/* Action Controls */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px', marginTop: '10px' }}>
-                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                      <button
-                        onClick={() => {
-                          if (activeActionModal === inc._id) {
-                            setActiveActionModal(null);
-                          } else {
-                            setActiveActionModal(inc._id);
-                            setActionForm({ action: '', notes: '' });
-                          }
-                        }}
-                        disabled={actionLoading === inc._id}
-                        className="aegis-btn aegis-btn-primary aegis-btn-sm"
-                        style={{ fontSize: '11.5px', padding: '4px 12px' }}
-                      >
-                        <PlusCircle size={12} />
-                        {isActionOpen ? 'Close Action Form' : 'Log Response Action'}
-                      </button>
-                    </div>
-
-                    {/* Action History Toggle Button */}
+                  {/* Card Footer with Audit Trail Toggle */}
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', flexWrap: 'wrap', gap: '10px', marginTop: '12px' }}>
                     <button
                       onClick={() => toggleHistory(inc._id)}
                       style={{
                         background: 'transparent',
                         border: 'none',
-                        color: '#6366F1',
+                        color: '#0284C7',
                         cursor: 'pointer',
                         fontSize: '12px',
-                        fontWeight: 600,
+                        fontWeight: 700,
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '4px',
+                        gap: '5px',
+                        padding: '4px 8px',
+                        borderRadius: '6px',
+                        transition: 'background 0.15s ease',
                       }}
                     >
-                      <History size={13} />
+                      <History size={14} />
                       <span>Audit Trail ({(inc.actionHistory || []).length})</span>
-                      {isHistoryOpen ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+                      {isHistoryOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                     </button>
                   </div>
 
-                  {/* Inline Response Action Logger Form */}
-                  {isActionOpen && (
-                    <div style={{ marginTop: '14px', background: '#F8FAFC', padding: '14px', borderRadius: '10px', border: '1px solid #BFDBFE' }}>
-                      <span style={{ fontSize: '12px', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '8px' }}>
-                        Record Incident Response Action
-                      </span>
-                      
-                      {/* Presets */}
-                      <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '10px' }}>
-                        {[
-                          'Triage Assessment Completed',
-                          'Host Network Isolation Logged',
-                          'Firewall Rule Requested',
-                          'Target Account Flagged',
-                          'Remediation Playbook Applied',
-                        ].map((preset) => (
-                          <button
-                            key={preset}
-                            type="button"
-                            onClick={() => setActionForm((prev) => ({ ...prev, action: preset }))}
-                            style={{
-                              background: actionForm.action === preset ? '#DBEAFE' : '#FFFFFF',
-                              color: actionForm.action === preset ? '#1E40AF' : '#475569',
-                              border: actionForm.action === preset ? '1px solid #93C5FD' : '1px solid #CBD5E1',
-                              borderRadius: '9999px',
-                              padding: '2px 10px',
-                              fontSize: '11px',
-                              fontWeight: 600,
-                              cursor: 'pointer',
-                            }}
-                          >
-                            {preset}
-                          </button>
-                        ))}
-                      </div>
-
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                        <input
-                          type="text"
-                          placeholder="Action summary (e.g. Verified IOC & blocked subnet)..."
-                          value={actionForm.action}
-                          onChange={(e) => setActionForm({ ...actionForm, action: e.target.value })}
-                          className="aegis-input-field"
-                          style={{ height: '34px', fontSize: '12px' }}
-                        />
-                        <input
-                          type="text"
-                          placeholder="Additional notes / reference ticket ID (optional)..."
-                          value={actionForm.notes}
-                          onChange={(e) => setActionForm({ ...actionForm, notes: e.target.value })}
-                          className="aegis-input-field"
-                          style={{ height: '34px', fontSize: '12px' }}
-                        />
-                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-start', marginTop: '2px' }}>
-                          <button
-                            onClick={() => handleRecordAction(inc._id, displayId, actionForm.action, actionForm.notes)}
-                            disabled={actionLoading === inc._id || !actionForm.action.trim()}
-                            className="aegis-btn aegis-btn-primary aegis-btn-sm"
-                            style={{ fontSize: '11.5px', padding: '4px 14px' }}
-                          >
-                            Save to Audit Trail
-                          </button>
-                          <button
-                            onClick={() => setActiveActionModal(null)}
-                            className="aegis-btn aegis-btn-secondary aegis-btn-sm"
-                            style={{ fontSize: '11.5px', padding: '4px 10px' }}
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
                   {/* Expandable Action Audit Trail */}
                   {isHistoryOpen && (
-                    <div style={{ marginTop: '14px', background: '#F8FAFC', padding: '12px 14px', borderRadius: '10px', border: '1px solid #E2E8F0' }}>
-                      <span style={{ fontSize: '11px', color: '#64748B', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+                    <div style={{ marginTop: '16px', background: '#F8FCFE', padding: '14px 16px', borderRadius: '12px', border: '1px solid rgba(186, 230, 253, 0.75)' }}>
+                      <span style={{ fontSize: '11px', color: '#0284C7', fontWeight: 800, textTransform: 'uppercase', display: 'block', marginBottom: '10px', letterSpacing: '0.5px' }}>
                         Incident Response History & Audit Trail
                       </span>
                       {(inc.actionHistory || []).length === 0 ? (
-                        <span style={{ fontSize: '12px', color: '#94A3B8', fontStyle: 'italic' }}>No containment actions recorded yet.</span>
+                        <span style={{ fontSize: '12px', color: '#94A3B8', fontStyle: 'italic' }}>No audit trail actions recorded yet.</span>
                       ) : (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                           {inc.actionHistory.map((act, aIdx) => (
                             <div
                               key={aIdx}
@@ -568,13 +446,13 @@ const IncidentResponse = () => {
                                 alignItems: 'center',
                                 fontSize: '12px',
                                 background: '#FFFFFF',
-                                padding: '6px 10px',
-                                borderRadius: '6px',
-                                border: '1px solid #E2E8F0',
+                                padding: '8px 12px',
+                                borderRadius: '8px',
+                                border: '1px solid rgba(186, 230, 253, 0.65)',
                               }}
                             >
                               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                <CheckCircle2 size={13} style={{ color: '#15803D' }} />
+                                <CheckCircle2 size={14} style={{ color: '#15803D' }} />
                                 <strong style={{ color: '#0F172A' }}>{act.action}</strong>
                                 <span style={{ color: '#64748B', fontSize: '11px' }}>({act.status || 'Recorded'})</span>
                               </div>

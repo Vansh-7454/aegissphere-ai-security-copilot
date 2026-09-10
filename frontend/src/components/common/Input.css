@@ -1,5 +1,6 @@
 /* =========================================================
-   AEGISPHERE LIGHT THEME FORM INPUT STYLES
+   AEGISPHERE LIGHT FORM INPUT STYLES
+   Clean Modern Light-Blue SaaS Styling
    ========================================================= */
 
 .aegis-input-container {
@@ -11,8 +12,8 @@
 
 .aegis-input-label {
   font-size: 12.5px;
-  font-weight: 600;
-  color: var(--text-heading);
+  font-weight: 700;
+  color: #0F172A;
   letter-spacing: 0.01em;
 }
 
@@ -25,41 +26,41 @@
 
 .aegis-input-field {
   width: 100%;
-  height: 40px;
-  padding: 0 12px;
+  height: 42px;
+  padding: 0 16px;
   background: #FFFFFF;
-  border: 1px solid var(--border-card);
+  border: 1px solid rgba(186, 230, 253, 0.85);
   border-radius: var(--radius-md);
   color: var(--text-primary);
   font-size: 13.5px;
   font-family: var(--font-sans);
   outline: none;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
 }
 
 .aegis-input-field:focus {
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(108, 77, 246, 0.15);
+  border-color: #0284C7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
 }
 
 .aegis-input-field::placeholder {
-  color: var(--text-muted);
+  color: #94A3B8;
 }
 
 .aegis-input-field:disabled {
-  background: #F1F5F9;
+  background: #F8FAFC;
   color: var(--text-muted);
   cursor: not-allowed;
   border-color: #E2E8F0;
 }
 
 .aegis-input-has-left {
-  padding-left: 38px;
+  padding-left: 40px;
 }
 
 .aegis-input-has-right {
-  padding-right: 38px;
+  padding-right: 40px;
 }
 
 .aegis-input-icon-left,
@@ -68,20 +69,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-muted);
+  color: #94A3B8;
   pointer-events: none;
 }
 
 .aegis-input-icon-left {
-  left: 12px;
+  left: 14px;
 }
 
 .aegis-input-icon-right {
-  right: 12px;
+  right: 14px;
 }
 
 .aegis-input-error-msg {
   font-size: 11.5px;
-  color: var(--status-critical);
+  color: #DC2626;
   margin-top: 2px;
 }

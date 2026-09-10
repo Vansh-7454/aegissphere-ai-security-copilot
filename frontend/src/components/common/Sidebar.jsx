@@ -12,21 +12,21 @@ import {
   BarChart3,
   Settings,
   LogOut,
-  ShieldCheck,
+  FlaskConical,
 } from 'lucide-react';
 import '../../styles/dashboard.css';
 
 const Sidebar = () => {
   const { user, logout } = useAuth();
 
-  const operationsMenu = [
+  const menuItems = [
     {
-      name: 'Command Center',
+      name: 'Dashboard',
       path: '/dashboard',
       icon: LayoutDashboard,
     },
     {
-      name: 'Log Ingestion',
+      name: 'Log Analysis',
       path: '/logs',
       icon: FileText,
     },
@@ -34,19 +34,6 @@ const Sidebar = () => {
       name: 'Threat Forensics',
       path: '/threats',
       icon: ShieldAlert,
-    },
-    {
-      name: 'Security Test Lab',
-      path: '/security-test',
-      icon: ShieldCheck,
-    },
-  ];
-
-  const intelligenceMenu = [
-    {
-      name: 'AI Agent Mesh',
-      path: '/agents',
-      icon: Cpu,
     },
     {
       name: 'Threat Intel Matrix',
@@ -59,13 +46,20 @@ const Sidebar = () => {
       icon: AlertTriangle,
     },
     {
+      name: 'Agent Coordinator',
+      path: '/agents',
+      icon: Cpu,
+    },
+    {
       name: 'SOC Reports',
       path: '/reports',
       icon: BarChart3,
     },
-  ];
-
-  const systemMenu = [
+    {
+      name: 'Security Test Lab',
+      path: '/security-test',
+      icon: FlaskConical,
+    },
     {
       name: 'System Settings',
       path: '/settings',
@@ -94,50 +88,10 @@ const Sidebar = () => {
           </div>
         </div>
 
-        {/* Section: Operations */}
-        <div className="soc-nav-section-title">OPERATIONS</div>
+        {/* Navigation Menu */}
+        <div className="soc-nav-section-title">NAVIGATION</div>
         <nav className="soc-nav-group">
-          {operationsMenu.map((item) => {
-            const Icon = item.icon;
-            return (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                className={({ isActive }) =>
-                  `soc-nav-item ${isActive ? 'active' : ''}`
-                }
-              >
-                <Icon size={16} className="soc-nav-icon" />
-                <span className="soc-nav-label">{item.name}</span>
-              </NavLink>
-            );
-          })}
-        </nav>
-
-        {/* Section: Intelligence */}
-        <div className="soc-nav-section-title">ANALYSIS & INTEL</div>
-        <nav className="soc-nav-group">
-          {intelligenceMenu.map((item) => {
-            const Icon = item.icon;
-            return (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                className={({ isActive }) =>
-                  `soc-nav-item ${isActive ? 'active' : ''}`
-                }
-              >
-                <Icon size={16} className="soc-nav-icon" />
-                <span className="soc-nav-label">{item.name}</span>
-              </NavLink>
-            );
-          })}
-        </nav>
-
-        {/* Section: System */}
-        <div className="soc-nav-section-title">SYSTEM & SETTINGS</div>
-        <nav className="soc-nav-group">
-          {systemMenu.map((item) => {
+          {menuItems.map((item) => {
             const Icon = item.icon;
             return (
               <NavLink
@@ -162,8 +116,8 @@ const Sidebar = () => {
             {getInitials(user?.name)}
           </div>
           <div className="soc-footer-meta">
-            <span className="soc-footer-name">{user?.name || 'Operator'}</span>
-            <span className="soc-footer-email">{user?.email || 'operator@sec.local'}</span>
+            <span className="soc-footer-name">{user?.name || 'Security Analyst'}</span>
+            <span className="soc-footer-email">{user?.email || 'analyst@aegis.local'}</span>
           </div>
           <button
             onClick={logout}
@@ -178,4 +132,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Sidebar;

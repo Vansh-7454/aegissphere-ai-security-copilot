@@ -45,8 +45,8 @@ const LandingFooter = () => {
               <Mail size={14} style={{ color: 'var(--accent-primary)' }} />
               <span>aegissphere@gmail.com</span>
             </div>
-            <p style={{ fontSize: '12px', color: 'var(--text-muted)', margin: 0 }}>
-              Academic & SOC Engineering Laboratory Project
+            <p style={{ fontSize: '12px', color: 'var(--text-secondary)', margin: 0 }}>
+              Autonomous SOC Operations & Threat Forensics Platform
             </p>
           </div>
         </div>

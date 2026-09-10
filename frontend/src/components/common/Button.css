@@ -1,6 +1,6 @@
 /* =========================================================
    AEGISPHERE BUTTON SYSTEM
-   Vibrant Blue Pill Buttons + Sleek Outline Pills
+   Sapphire / Cyan Pill Buttons + Clean Secondary Buttons
    ========================================================= */
 
 .aegis-btn {
@@ -11,7 +11,7 @@
   font-family: var(--font-sans);
   font-weight: 600;
   border-radius: var(--radius-pill);
-  border: 1.5px solid transparent;
+  border: 1px solid transparent;
   cursor: pointer;
   transition: all var(--transition-fast);
   white-space: nowrap;
@@ -50,14 +50,16 @@
 .aegis-btn-primary {
   background: var(--gradient-primary);
   color: #FFFFFF;
+  font-weight: 700;
   border-color: transparent;
   box-shadow: var(--shadow-btn);
 }
 
 .aegis-btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #1D4ED8 0%, #0070DF 100%);
+  background: linear-gradient(135deg, #0369A1 0%, #0284C7 60%, #0891B2 100%);
   box-shadow: var(--shadow-btn-hover);
   transform: translateY(-1px);
+  color: #FFFFFF;
 }
 
 .aegis-btn-primary:active:not(:disabled) {
@@ -66,13 +68,13 @@
 
 .aegis-btn-secondary {
   background: #FFFFFF;
-  color: var(--text-primary);
-  border-color: #BFDBFE;
-  box-shadow: var(--shadow-sm);
+  color: #0F172A;
+  border-color: rgba(186, 230, 253, 0.9);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .aegis-btn-secondary:hover:not(:disabled) {
-  background: #EFF6FF;
+  background: #F0F9FF;
   border-color: var(--accent-primary);
   color: var(--accent-primary);
 }
@@ -80,13 +82,13 @@
 .aegis-btn-outline {
   background: transparent;
   color: var(--accent-primary);
-  border-color: #93C5FD;
+  border-color: rgba(2, 132, 199, 0.4);
 }
 
 .aegis-btn-outline:hover:not(:disabled) {
-  color: #1D4ED8;
-  border-color: #3B82F6;
-  background: #EFF6FF;
+  color: #0369A1;
+  border-color: var(--accent-primary);
+  background: #F0F9FF;
 }
 
 .aegis-btn-ghost {
@@ -96,8 +98,8 @@
 }
 
 .aegis-btn-ghost:hover:not(:disabled) {
-  color: var(--text-primary);
-  background: rgba(37, 99, 235, 0.08);
+  color: #0284C7;
+  background: rgba(2, 132, 199, 0.08);
 }
 
 .aegis-btn-danger {

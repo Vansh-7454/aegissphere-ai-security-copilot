@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '../components/common/Layout';
-import { Search, BrainCircuit, Globe, Crosshair, Cpu, Database, AlertCircle, CheckCircle2, Info } from 'lucide-react';
+import { BrainCircuit, Globe, Crosshair, Cpu, Database, Info } from 'lucide-react';
 import Badge from '../components/common/Badge';
 import Button from '../components/common/Button';
 import '../styles/dashboard.css';
@@ -147,10 +147,10 @@ const ThreatIntelMatrix = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span
               style={{
-                background: '#E2EEFE',
-                color: '#1E40AF',
-                border: '1px solid #BFDBFE',
-                padding: '4px 12px',
+                background: '#E0F2FE',
+                color: '#0284C7',
+                border: '1px solid #BAE6FD',
+                padding: '5px 14px',
                 borderRadius: '9999px',
                 fontSize: '11px',
                 fontWeight: 700,
@@ -163,10 +163,10 @@ const ThreatIntelMatrix = () => {
 
         {/* MITRE Knowledge Lookup Box */}
         <div className="soc-table-card" style={{ padding: '24px' }}>
-          <h3 className="soc-table-title" style={{ fontSize: '16px' }}>
+          <h3 className="soc-table-title" style={{ fontSize: '16px', color: '#0F172A' }}>
             MITRE ATT&CK Technique Lookup
           </h3>
-          <p style={{ fontSize: '12.5px', color: 'var(--text-secondary)', margin: '2px 0 14px 0' }}>
+          <p style={{ fontSize: '12.5px', color: 'var(--text-secondary)', margin: '2px 0 16px 0' }}>
             Search local MITRE ATT&CK knowledge base by technique ID (e.g., T1110, T1190, T1059) or keyword.
           </p>
 
@@ -180,11 +180,13 @@ const ThreatIntelMatrix = () => {
                 className="soc-search-input"
                 style={{
                   width: '100%',
-                  height: '40px',
+                  height: '42px',
                   background: '#FFFFFF',
-                  border: '1px solid #BFDBFE',
+                  border: '1px solid rgba(186, 230, 253, 0.85)',
                   borderRadius: '9999px',
-                  padding: '0 16px',
+                  padding: '0 18px',
+                  color: 'var(--text-primary)',
+                  fontSize: '13px',
                 }}
               />
             </div>
@@ -196,22 +198,23 @@ const ThreatIntelMatrix = () => {
           {searched && queryResult && queryResult.found && (
             <div
               style={{
-                marginTop: '16px',
-                background: '#FFFFFF',
-                border: '1px solid #BFDBFE',
+                marginTop: '18px',
+                background: '#F0F9FF',
+                border: '1px solid rgba(186, 230, 253, 0.85)',
                 borderRadius: 'var(--radius-lg)',
-                padding: '16px',
+                padding: '18px',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '8px',
+                gap: '10px',
+                boxShadow: '0 4px 12px rgba(2, 132, 199, 0.04)',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span style={{ fontSize: '14px', fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#2563EB' }}>
+                  <span style={{ fontSize: '14px', fontFamily: 'var(--font-mono)', fontWeight: 800, color: '#0284C7' }}>
                     {queryResult.data.id}
                   </span>
-                  <strong style={{ fontSize: '15px', color: 'var(--text-heading)' }}>
+                  <strong style={{ fontSize: '15px', color: '#0F172A' }}>
                     {queryResult.data.name}
                   </strong>
                 </div>
@@ -220,15 +223,15 @@ const ThreatIntelMatrix = () => {
                 </Badge>
               </div>
 
-              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: '4px 0 0 0' }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: '4px 0 0 0', lineHeight: 1.5 }}>
                 {queryResult.data.desc}
               </p>
 
-              <div style={{ background: '#DCFCE7', padding: '10px 14px', borderRadius: '8px', border: '1px solid #BBF7D0', marginTop: '4px' }}>
-                <span style={{ fontSize: '11px', color: '#15803D', fontWeight: 700, textTransform: 'uppercase', display: 'block' }}>
+              <div style={{ background: '#DCFCE7', padding: '12px 14px', borderRadius: '10px', border: '1px solid #BBF7D0', marginTop: '4px' }}>
+                <span style={{ fontSize: '11px', color: '#15803D', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '2px' }}>
                   Mitigation Guidance
                 </span>
-                <span style={{ fontSize: '12.5px', color: '#14532D' }}>
+                <span style={{ fontSize: '12.5px', color: '#14532D', lineHeight: 1.45 }}>
                   {queryResult.data.mitigations}
                 </span>
               </div>
@@ -238,7 +241,7 @@ const ThreatIntelMatrix = () => {
           {searched && queryResult && !queryResult.found && (
             <div
               style={{
-                marginTop: '16px',
+                marginTop: '18px',
                 background: '#EFF6FF',
                 border: '1px solid #BFDBFE',
                 borderRadius: 'var(--radius-lg)',
@@ -250,7 +253,7 @@ const ThreatIntelMatrix = () => {
                 gap: '10px',
               }}
             >
-              <Info size={18} style={{ flexShrink: 0 }} />
+              <Info size={18} style={{ flexShrink: 0, color: '#2563EB' }} />
               <div>
                 <strong>External Threat Intelligence Feed Offline:</strong> No local definition matched "{queryResult.query}". Live external CVE/NVD intelligence API lookups are currently unavailable.
               </div>
@@ -265,15 +268,15 @@ const ThreatIntelMatrix = () => {
             return (
               <div key={idx} className="soc-stat-card" style={{ padding: '22px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: '#E2EEFE', color: '#2563EB', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Icon size={16} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div style={{ width: '34px', height: '34px', borderRadius: '10px', background: '#E0F2FE', color: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Icon size={18} />
                     </div>
                     <div>
-                      <h4 style={{ fontSize: '14px', fontWeight: 800, color: 'var(--text-heading)', margin: 0 }}>
+                      <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#0F172A', margin: 0 }}>
                         {tactic.tactic}
                       </h4>
-                      <span style={{ fontSize: '10.5px', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
+                      <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
                         {tactic.id}
                       </span>
                     </div>
@@ -285,27 +288,28 @@ const ThreatIntelMatrix = () => {
                     <div
                       key={tIdx}
                       style={{
-                        background: '#FFFFFF',
-                        border: '1px solid #BFDBFE',
+                        background: '#F8FCFE',
+                        border: '1px solid rgba(186, 230, 253, 0.75)',
                         borderRadius: 'var(--radius-md)',
-                        padding: '12px',
+                        padding: '12px 14px',
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: '4px',
+                        gap: '5px',
+                        boxShadow: '0 2px 6px rgba(15, 23, 42, 0.02)',
                       }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <span style={{ fontSize: '11.5px', fontFamily: 'var(--font-mono)', color: '#2563EB', fontWeight: 600 }}>
+                        <span style={{ fontSize: '11.5px', fontFamily: 'var(--font-mono)', color: '#0284C7', fontWeight: 800 }}>
                           {tech.id}
                         </span>
                         <Badge variant={getSeverityVariant(tech.severity)} size="sm">
                           {tech.severity}
                         </Badge>
                       </div>
-                      <strong style={{ fontSize: '12.5px', color: 'var(--text-heading)' }}>
+                      <strong style={{ fontSize: '12.5px', color: '#0F172A' }}>
                         {tech.name}
                       </strong>
-                      <p style={{ fontSize: '11.5px', color: 'var(--text-secondary)', margin: 0 }}>
+                      <p style={{ fontSize: '11.5px', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
                         {tech.desc}
                       </p>
                     </div>

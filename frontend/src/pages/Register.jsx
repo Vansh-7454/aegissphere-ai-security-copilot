@@ -105,22 +105,22 @@ const Register = () => {
 
             <div className="auth-feature-list">
               <div className="auth-feature-row">
-                <CheckCircle2 size={16} style={{ color: '#15803D', flexShrink: 0 }} />
+                <CheckCircle2 size={16} style={{ color: '#0284C7' }} />
                 <span>Multi-format security log ingestion (.log, .txt, .csv, .json)</span>
               </div>
               <div className="auth-feature-row">
-                <CheckCircle2 size={16} style={{ color: '#15803D', flexShrink: 0 }} />
+                <CheckCircle2 size={16} style={{ color: '#0284C7' }} />
                 <span>Rule-based detection for SQLi, brute force, and port scans</span>
               </div>
               <div className="auth-feature-row">
-                <CheckCircle2 size={16} style={{ color: '#15803D', flexShrink: 0 }} />
+                <CheckCircle2 size={16} style={{ color: '#0284C7' }} />
                 <span>Controlled Security Test Lab for safe simulation</span>
               </div>
             </div>
           </div>
 
           <div className="auth-showcase-footer">
-            AegisSphere · College Final-Year Project
+            <span>AegisSphere · AI Security Operations Platform</span>
           </div>
         </div>
 
