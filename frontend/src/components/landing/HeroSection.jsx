@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Shield,
@@ -8,11 +8,49 @@ import {
   LayoutDashboard,
   FileText,
   Search,
+  Activity,
 } from 'lucide-react';
 import Badge from '../common/Badge';
+import api from '../../services/api';
 import '../../styles/landing.css';
 
 const HeroSection = () => {
+  const [liveData, setLiveData] = useState({
+    totalLogs: 0,
+    totalThreats: 0,
+    openIncidents: 0,
+    recentThreats: [],
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    const fetchLivePreview = async () => {
+      try {
+        const res = await api.get('/auth/platform-preview');
+        if (res.data?.success && isMounted) {
+          setLiveData({
+            totalLogs: res.data.stats?.totalLogs || 0,
+            totalThreats: res.data.stats?.totalThreats || 0,
+            openIncidents: res.data.stats?.openIncidents || 0,
+            recentThreats: res.data.recentThreats || [],
+          });
+        }
+      } catch (err) {
+        console.warn('Failed to fetch live platform preview:', err.message);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+
+    fetchLivePreview();
+    const interval = setInterval(fetchLivePreview, 15000); // Poll every 15s for live updates
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
     <section className="landing-hero">
       {/* Left Content */}
@@ -50,10 +88,10 @@ const HeroSection = () => {
             <span className="mockup-dot" />
             <span className="mockup-dot" />
           </div>
-          <span className="mockup-url-bar">https://aegissphere.io/dashboard</span>
+          <span className="mockup-url-bar">https://aegissphere.io/admin</span>
           <span style={{ fontSize: '11px', color: '#15803D', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '5px', fontWeight: 700 }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#15803D' }} />
-            Live Preview
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#15803D', animation: 'pulse 2s infinite' }} />
+            Real-Time Live
           </span>
         </div>
 
@@ -71,7 +109,7 @@ const HeroSection = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '4px' }}>
               <div style={{ background: '#E0F2FE', color: '#0284C7', padding: '5px 8px', borderRadius: '6px', fontSize: '10.5px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '5px', border: '1px solid #BAE6FD' }}>
                 <LayoutDashboard size={11} />
-                <span>Dashboard</span>
+                <span>Overview</span>
               </div>
               <div style={{ color: '#475569', padding: '4px 8px', fontSize: '10px', display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <FileText size={10} />
@@ -92,10 +130,11 @@ const HeroSection = () => {
           <div style={{ flex: 1, padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div>
-                <h4 style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A', margin: 0 }}>Dashboard</h4>
-                <span style={{ fontSize: '10px', color: '#64748B' }}>Welcome back, analyst</span>
+                <h4 style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A', margin: 0 }}>SOC Telemetry</h4>
+                <span style={{ fontSize: '10px', color: '#64748B' }}>Live Platform Overview</span>
               </div>
-              <span style={{ background: '#E0F2FE', border: '1px solid #BAE6FD', padding: '2px 8px', borderRadius: '9999px', fontSize: '9.5px', color: '#0284C7', fontWeight: 700 }}>
+              <span style={{ background: '#DCFCE7', border: '1px solid #BBF7D0', padding: '2px 8px', borderRadius: '9999px', fontSize: '9.5px', color: '#15803D', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <Activity size={10} />
                 Live Stream
               </span>
             </div>
@@ -105,17 +144,21 @@ const HeroSection = () => {
               <div style={{ background: '#FFFFFF', borderRadius: '10px', padding: '8px 10px', border: '1px solid rgba(186, 230, 253, 0.75)', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.02)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2px' }}>
                   <span style={{ fontSize: '9.5px', color: '#64748B', fontWeight: 600 }}>Total Logs</span>
-                  <span style={{ fontSize: '8.5px', color: '#15803D', fontWeight: 700 }}>+12%</span>
+                  <span style={{ fontSize: '8.5px', color: '#15803D', fontWeight: 700 }}>Real-time</span>
                 </div>
-                <strong style={{ fontSize: '14px', color: '#0F172A', display: 'block' }}>1,246</strong>
+                <strong style={{ fontSize: '14px', color: '#0F172A', display: 'block' }}>
+                  {loading ? '...' : liveData.totalLogs.toLocaleString()}
+                </strong>
               </div>
 
               <div style={{ background: '#FFFFFF', borderRadius: '10px', padding: '8px 10px', border: '1px solid rgba(186, 230, 253, 0.75)', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.02)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2px' }}>
                   <span style={{ fontSize: '9.5px', color: '#64748B', fontWeight: 600 }}>Threats Detected</span>
-                  <span style={{ fontSize: '8.5px', color: '#EA580C', fontWeight: 700 }}>Active</span>
+                  <span style={{ fontSize: '8.5px', color: '#DC2626', fontWeight: 700 }}>Active</span>
                 </div>
-                <strong style={{ fontSize: '14px', color: '#EA580C', display: 'block' }}>8</strong>
+                <strong style={{ fontSize: '14px', color: '#DC2626', display: 'block' }}>
+                  {loading ? '...' : liveData.totalThreats.toLocaleString()}
+                </strong>
               </div>
 
               <div style={{ background: '#FFFFFF', borderRadius: '10px', padding: '8px 10px', border: '1px solid rgba(186, 230, 253, 0.75)', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.02)' }}>
@@ -123,30 +166,59 @@ const HeroSection = () => {
                   <span style={{ fontSize: '9.5px', color: '#64748B', fontWeight: 600 }}>Open Incidents</span>
                   <span style={{ fontSize: '8.5px', color: '#0284C7', fontWeight: 700 }}>Active</span>
                 </div>
-                <strong style={{ fontSize: '14px', color: '#0F172A', display: 'block' }}>5</strong>
+                <strong style={{ fontSize: '14px', color: '#0F172A', display: 'block' }}>
+                  {loading ? '...' : liveData.openIncidents.toLocaleString()}
+                </strong>
               </div>
             </div>
 
             {/* Recent Threats Table Mockup */}
             <div style={{ background: '#FFFFFF', borderRadius: '10px', padding: '10px', border: '1px solid rgba(186, 230, 253, 0.75)', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.02)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px', fontSize: '10px', fontWeight: 700, color: '#0F172A' }}>
-                <span>Recent Threats</span>
+                <span>Recent Platform Detections</span>
                 <span style={{ color: '#0284C7', fontSize: '9.5px' }}>Live Telemetry</span>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                {[
-                  { name: 'SSH Password Spraying', sev: 'critical', ip: 'Ingress Node', time: 'Rule T1110' },
-                  { name: 'SQL Injection Attack', sev: 'high', ip: 'Web Gateway', time: 'Rule T1190' },
-                  { name: 'Port Recon Sweep', sev: 'medium', ip: 'DMZ Router', time: 'Rule T1595' },
-                ].map((item, idx) => (
-                  <div key={idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '4px 0', borderBottom: idx < 2 ? '1px solid rgba(186, 230, 253, 0.4)' : 'none', fontSize: '9.5px' }}>
-                    <span style={{ fontWeight: 600, color: '#0F172A', width: '110px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.name}</span>
-                    <Badge variant={item.sev} size="sm">{item.sev}</Badge>
-                    <span style={{ fontFamily: 'var(--font-mono)', color: '#0284C7', fontSize: '9px' }}>{item.ip}</span>
-                    <span style={{ color: '#64748B', fontSize: '8.5px' }}>{item.time}</span>
+                {liveData.recentThreats.length > 0 ? (
+                  liveData.recentThreats.slice(0, 3).map((item, idx) => (
+                    <div
+                      key={item.id || idx}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '4px 0',
+                        borderBottom: idx < 2 ? '1px solid rgba(186, 230, 253, 0.4)' : 'none',
+                        fontSize: '9.5px',
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontWeight: 600,
+                          color: '#0F172A',
+                          width: '120px',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {item.name}
+                      </span>
+                      <Badge variant={item.sev} size="sm">{item.severity}</Badge>
+                      <span style={{ fontFamily: 'var(--font-mono)', color: '#0284C7', fontSize: '9px' }}>
+                        {item.ip}
+                      </span>
+                      <span style={{ color: '#64748B', fontSize: '8.5px', maxWidth: '80px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {item.time}
+                      </span>
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ textAlign: 'center', padding: '8px', color: '#64748B', fontSize: '10px' }}>
+                    {loading ? 'Connecting to live telemetry stream...' : 'No threats detected in database.'}
                   </div>
-                ))}
+                )}
               </div>
             </div>
           </div>

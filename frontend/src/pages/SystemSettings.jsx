@@ -149,7 +149,7 @@ const SystemSettings = () => {
                 <p style={{ fontSize: '12.5px', color: '#1E3A8A', margin: 0, lineHeight: 1.55 }}>
                   Signed cryptographic JWT token verified on every API request. User-specific personal SOC telemetry boundary is enforced across all endpoints.
                 </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '18px', fontSize: '11.5px', color: '#1E40AF', paddingTop: '4px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px 18px', fontSize: '11.5px', color: '#1E40AF', paddingTop: '4px' }}>
                   <span>Token Lifecycle: <strong>7 Days (Standard SOC Rotation)</strong></span>
                   <span>Registered: <strong>{formatDate(user?.createdAt)}</strong></span>
                 </div>
@@ -179,9 +179,9 @@ const SystemSettings = () => {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {/* Component 1: Multi-Agent Mesh */}
-                <div style={{ background: '#F8FCFE', padding: '16px 20px', borderRadius: '12px', border: '1px solid rgba(186, 230, 253, 0.75)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: '#E0F2FE', color: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ background: '#F8FCFE', padding: '16px 20px', borderRadius: '12px', border: '1px solid rgba(186, 230, 253, 0.75)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', minWidth: '0', flex: '1 1 240px' }}>
+                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: '#E0F2FE', color: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <Cpu size={20} />
                     </div>
                     <div>
@@ -195,9 +195,9 @@ const SystemSettings = () => {
                 </div>
 
                 {/* Component 2: User Isolation */}
-                <div style={{ background: '#F8FCFE', padding: '16px 20px', borderRadius: '12px', border: '1px solid rgba(186, 230, 253, 0.75)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: '#DCFCE7', color: '#15803D', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ background: '#F8FCFE', padding: '16px 20px', borderRadius: '12px', border: '1px solid rgba(186, 230, 253, 0.75)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', minWidth: '0', flex: '1 1 240px' }}>
+                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: '#DCFCE7', color: '#15803D', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <ShieldCheck size={20} />
                     </div>
                     <div>
@@ -211,9 +211,9 @@ const SystemSettings = () => {
                 </div>
 
                 {/* Component 3: Google Gemini AI Advisory Service */}
-                <div style={{ background: '#F8FCFE', padding: '16px 20px', borderRadius: '12px', border: '1px solid rgba(186, 230, 253, 0.75)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: '#EDE9FE', color: '#7C3AED', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ background: '#F8FCFE', padding: '16px 20px', borderRadius: '12px', border: '1px solid rgba(186, 230, 253, 0.75)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', minWidth: '0', flex: '1 1 240px' }}>
+                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: '#EDE9FE', color: '#7C3AED', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <BrainCircuit size={20} />
                     </div>
                     <div>
@@ -239,9 +239,9 @@ const SystemSettings = () => {
                 </div>
 
                 {/* Component 4: MongoDB Persistence */}
-                <div style={{ background: '#F8FCFE', padding: '16px 20px', borderRadius: '12px', border: '1px solid rgba(186, 230, 253, 0.75)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: '#F1F5F9', color: '#475569', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ background: '#F8FCFE', padding: '16px 20px', borderRadius: '12px', border: '1px solid rgba(186, 230, 253, 0.75)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', minWidth: '0', flex: '1 1 240px' }}>
+                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: '#F1F5F9', color: '#475569', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <Database size={20} />
                     </div>
                     <div>
@@ -255,9 +255,9 @@ const SystemSettings = () => {
                 </div>
 
                 {/* Component 5: PDF Reports Engine */}
-                <div style={{ background: '#F8FCFE', padding: '16px 20px', borderRadius: '12px', border: '1px solid rgba(186, 230, 253, 0.75)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: '#E0F2FE', color: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ background: '#F8FCFE', padding: '16px 20px', borderRadius: '12px', border: '1px solid rgba(186, 230, 253, 0.75)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', minWidth: '0', flex: '1 1 240px' }}>
+                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: '#E0F2FE', color: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <FileText size={20} />
                     </div>
                     <div>

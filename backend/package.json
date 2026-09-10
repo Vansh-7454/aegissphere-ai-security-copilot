@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "create-admin": "node scripts/createAdmin.js"
   },
   "nodemonConfig": {
     "watch": [

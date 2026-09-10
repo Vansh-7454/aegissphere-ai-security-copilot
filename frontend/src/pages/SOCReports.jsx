@@ -146,7 +146,7 @@ const SOCReports = () => {
           />
         ) : (
           /* Reports Grid */
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '16px' }}>
             {reports.map((report) => {
               const isDownloading = downloadingId === report._id;
               return (
@@ -168,8 +168,8 @@ const SOCReports = () => {
                     {report.summary || 'Authoritative security audit log and threat classification summary.'}
                   </p>
 
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '14px', borderTop: '1px solid rgba(186, 230, 253, 0.65)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', paddingTop: '14px', borderTop: '1px solid rgba(186, 230, 253, 0.65)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
                       <span style={{ fontSize: '12px', fontWeight: 700, color: '#0F172A' }}>
                         {report.threatCount || 0} Correlated Threat{report.threatCount === 1 ? '' : 's'}
                       </span>

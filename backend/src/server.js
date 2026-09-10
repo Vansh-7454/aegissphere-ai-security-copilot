@@ -12,6 +12,7 @@ const incidentRoutes = require("./routes/incidentRoutes");
 const aiRoutes = require("./routes/aiRoutes");
 const reportRoutes = require("./routes/reportRoutes");
 const threatRoutes = require("./routes/threatRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 const {
   apiLimiter,
@@ -81,6 +82,7 @@ app.use("/api/incidents", incidentRoutes);
 app.use("/api/ai", aiLimiter, aiRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/threats", threatRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.get("/", (req, res) => {
   res.send("🚀 AegisSphere Backend Running...");

@@ -6,9 +6,14 @@ const Incident = require("../models/Incident");
 const User = require("../models/User");
 const PdfReportService = require("../services/PdfReportService");
 
-// Helper to check user permission on a report (Strict Owner Check)
+// Helper to check user permission on a report (Strict Owner Check, Admin Bypass)
 const isUserAuthorizedForReport = (user, report) => {
   if (!user || !report) return false;
+
+  // Administrators have platform-wide report viewing & download authority
+  if (user.role && user.role.toLowerCase() === 'admin') {
+    return true;
+  }
 
   const userIdStr = user.id || (user._id && user._id.toString());
 

@@ -171,7 +171,7 @@ const ThreatIntelMatrix = () => {
           </p>
 
           <form onSubmit={handleLookup} style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-            <div style={{ flex: 1, minWidth: '280px' }}>
+            <div style={{ flex: '1 1 200px', minWidth: '0' }}>
               <input
                 type="text"
                 value={searchQuery}

@@ -11,8 +11,18 @@ import ThreatIntelMatrix from '../pages/ThreatIntelMatrix';
 import IncidentResponse from '../pages/IncidentResponse';
 import SOCReports from '../pages/SOCReports';
 import SystemSettings from '../pages/SystemSettings';
+import SecurityTestLab from '../pages/SecurityTestLab';
 import ProtectedRoute from '../components/common/ProtectedRoute';
-import SecurityTestLab from "../pages/SecurityTestLab";
+
+// Admin Console Pages
+import AdminDashboard from '../pages/admin/AdminDashboard';
+import AdminUsers from '../pages/admin/AdminUsers';
+import AdminThreats from '../pages/admin/AdminThreats';
+import AdminIncidents from '../pages/admin/AdminIncidents';
+import AdminReports from '../pages/admin/AdminReports';
+import AdminAgents from '../pages/admin/AdminAgents';
+import AdminAuditLogs from '../pages/admin/AdminAuditLogs';
+import AdminSystemHealth from '../pages/admin/AdminSystemHealth';
 
 const AppRoutes = () => {
   return (
@@ -38,7 +48,7 @@ const AppRoutes = () => {
         }
       />
 
-      {/* Protected Workspace Routes */}
+      {/* Protected Analyst Workspace Routes */}
       <Route
         path="/dashboard"
         element={
@@ -104,13 +114,87 @@ const AppRoutes = () => {
         }
       />
       <Route
-  path="/security-test"
-  element={
-    <ProtectedRoute requireAuth={true}>
-      <SecurityTestLab />
-    </ProtectedRoute>
-  }
-/>
+        path="/security-test"
+        element={
+          <ProtectedRoute requireAuth={true}>
+            <SecurityTestLab />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Protected Admin Console Routes */}
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute requireAuth={true} requireAdmin={true}>
+            <AdminDashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/dashboard"
+        element={
+          <ProtectedRoute requireAuth={true} requireAdmin={true}>
+            <AdminDashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/users"
+        element={
+          <ProtectedRoute requireAuth={true} requireAdmin={true}>
+            <AdminUsers />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/threats"
+        element={
+          <ProtectedRoute requireAuth={true} requireAdmin={true}>
+            <AdminThreats />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/incidents"
+        element={
+          <ProtectedRoute requireAuth={true} requireAdmin={true}>
+            <AdminIncidents />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/reports"
+        element={
+          <ProtectedRoute requireAuth={true} requireAdmin={true}>
+            <AdminReports />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/agents"
+        element={
+          <ProtectedRoute requireAuth={true} requireAdmin={true}>
+            <AdminAgents />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/audit-logs"
+        element={
+          <ProtectedRoute requireAuth={true} requireAdmin={true}>
+            <AdminAuditLogs />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/health"
+        element={
+          <ProtectedRoute requireAuth={true} requireAdmin={true}>
+            <AdminSystemHealth />
+          </ProtectedRoute>
+        }
+      />
 
       {/* Fallback Redirection to Landing Website */}
       <Route path="*" element={<Navigate to="/" replace />} />

@@ -38,6 +38,32 @@
   }
 }
 
+@media (max-width: 540px) {
+  .auth-page {
+    padding: 16px 10px;
+  }
+  .auth-container {
+    gap: 14px;
+  }
+  .auth-showcase-box {
+    padding: 20px 16px;
+    border-radius: var(--radius-xl);
+  }
+  .auth-showcase-title {
+    font-size: 18px;
+  }
+  .auth-showcase-hero {
+    margin: 16px 0;
+  }
+  .auth-form-box {
+    padding: 24px 16px;
+    border-radius: var(--radius-xl);
+  }
+  .auth-form-title {
+    font-size: 20px;
+  }
+}
+
 /* Left Showcase Box - Light-Blue Hero Gradient Theme (Matching Welcome Banner) */
 .auth-showcase-box {
   background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 50%, #F0F9FF 100%);

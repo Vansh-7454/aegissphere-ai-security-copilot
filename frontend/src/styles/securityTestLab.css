@@ -169,3 +169,23 @@
   color: #1E40AF;
   line-height: 1.55;
 }
+
+@media (max-width: 540px) {
+  .testlab-card,
+  .testlab-result-card {
+    padding: 18px 14px;
+    border-radius: var(--radius-xl);
+    gap: 14px;
+  }
+
+  .testlab-result-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .testlab-info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

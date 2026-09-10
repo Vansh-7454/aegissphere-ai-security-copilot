@@ -1,9 +1,9 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { Search, Bell, User, Shield } from 'lucide-react';
+import { Search, Menu, Shield } from 'lucide-react';
 import '../../styles/dashboard.css';
 
-const Navbar = () => {
+const Navbar = ({ onToggleNav, isMobileOpen }) => {
   const { user } = useAuth();
 
   const getInitials = (name) => {
@@ -16,8 +16,20 @@ const Navbar = () => {
   return (
     <header className="soc-navbar">
       <div className="soc-navbar-left">
+        {/* Mobile Hamburger Toggle Button */}
+        <button
+          type="button"
+          onClick={onToggleNav}
+          className="soc-nav-toggle-btn"
+          aria-label="Toggle navigation menu"
+          aria-expanded={isMobileOpen}
+          title="Toggle Navigation Menu"
+        >
+          <Menu size={20} />
+        </button>
+
         <div className="soc-status-indicator" title="Threat Detection Engine Status">
-          <span className="soc-status-dot"></span>
+          <span className="soc-status-dot" />
           <span className="soc-status-label">System Active</span>
         </div>
       </div>

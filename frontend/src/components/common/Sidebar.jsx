@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
   Shield,
@@ -13,11 +13,14 @@ import {
   Settings,
   LogOut,
   FlaskConical,
+  ShieldCheck,
+  X,
 } from 'lucide-react';
 import '../../styles/dashboard.css';
 
-const Sidebar = () => {
+const Sidebar = ({ isMobileOpen, onClose }) => {
   const { user, logout } = useAuth();
+  const isAdmin = user?.role?.toLowerCase() === 'admin';
 
   const menuItems = [
     {
@@ -74,19 +77,50 @@ const Sidebar = () => {
     return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
   };
 
+  const handleLinkClick = () => {
+    if (onClose) {
+      onClose();
+    }
+  };
+
   return (
-    <aside className="soc-sidebar">
+    <aside className={`soc-sidebar ${isMobileOpen ? 'mobile-open' : ''}`}>
       <div className="soc-sidebar-top">
-        {/* Brand */}
+        {/* Brand & Mobile Close Button */}
         <div className="soc-brand">
-          <div className="soc-brand-icon">
-            <Shield size={18} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div className="soc-brand-icon">
+              <Shield size={18} />
+            </div>
+            <div className="soc-brand-text">
+              <span className="soc-brand-title">AegisSphere</span>
+              <span className="soc-brand-badge">SOC Console</span>
+            </div>
           </div>
-          <div className="soc-brand-text">
-            <span className="soc-brand-title">AegisSphere</span>
-            <span className="soc-brand-badge">SOC Console</span>
-          </div>
+
+          {/* Close button on mobile drawer */}
+          <button
+            onClick={onClose}
+            className="soc-sidebar-close-btn"
+            title="Close navigation"
+            aria-label="Close menu"
+          >
+            <X size={18} />
+          </button>
         </div>
+
+        {/* Admin Quick Switch (Visible only to Admins) */}
+        {isAdmin && (
+          <Link
+            to="/admin"
+            className="soc-admin-switch-btn"
+            title="Switch to Admin Console"
+            onClick={handleLinkClick}
+          >
+            <ShieldCheck size={15} />
+            <span>Admin Console</span>
+          </Link>
+        )}
 
         {/* Navigation Menu */}
         <div className="soc-nav-section-title">NAVIGATION</div>
@@ -97,6 +131,7 @@ const Sidebar = () => {
               <NavLink
                 key={item.path}
                 to={item.path}
+                onClick={handleLinkClick}
                 className={({ isActive }) =>
                   `soc-nav-item ${isActive ? 'active' : ''}`
                 }
@@ -132,4 +167,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Sidebar;
