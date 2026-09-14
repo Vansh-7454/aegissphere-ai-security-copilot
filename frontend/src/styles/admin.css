@@ -334,27 +334,27 @@
 }
 
 .admin-content-area {
-  padding: 24px 28px 48px 28px;
+  padding: clamp(16px, 2.2vw, 28px) clamp(14px, 2.2vw, 32px) 48px clamp(14px, 2.2vw, 32px);
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 1540px;
+  gap: clamp(16px, 2vw, 24px);
+  max-width: min(100%, 1500px);
   width: 100%;
-  margin: 0 auto;
+  margin-inline: auto;
   min-width: 0;
 }
 
 @media (max-width: 768px) {
   .admin-content-area {
-    padding: 14px 10px 36px 10px;
+    padding: 12px 10px 36px 10px;
   }
 }
 
 /* Admin KPI Grid */
 .admin-kpi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: clamp(10px, 1.4vw, 16px);
   width: 100%;
 }
 

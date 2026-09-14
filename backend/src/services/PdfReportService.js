@@ -7,6 +7,74 @@ const PDFDocument = require("pdfkit");
  */
 class PdfReportService {
   /**
+   * Translates technical cybersecurity threat types into crystal-clear plain language.
+   * @param {Array} threats - Array of Threat documents
+   * @returns {Object} Plain language overview
+   */
+  static getPlainLanguageSummary(threats = []) {
+    if (!threats || threats.length === 0) {
+      return {
+        whatHappened: "Normal System Operation: Standard routine system events analyzed with zero attack signatures or security anomalies.",
+        riskImpact: "Safe / Zero Risk: No threats detected. All monitored access patterns conform to baseline traffic.",
+        actionRequired: "No intervention needed. Telemetry archived for SOC compliance and audit trail.",
+        accentColor: "#0284C7",
+      };
+    }
+
+    const primaryThreat = threats[0];
+    const tt = (primaryThreat.threatType || "").toLowerCase();
+    const severity = primaryThreat.severity || "Low";
+    const sourceIp = primaryThreat.sourceIp || null;
+
+    let whatHappened = "";
+    let riskImpact = "";
+    let actionRequired = "";
+    let accentColor = "#0284C7";
+
+    if (tt.includes("port") || tt.includes("sweep") || tt.includes("scan") || tt.includes("probe")) {
+      whatHappened = "Network Reconnaissance (Port Scan): An external host was testing sequential network ports (doors) to see which services are listening.";
+      riskImpact = "Low Risk (Blocked): Attacker was probing from the outside. Closed ports successfully rejected the probes — no internal breach occurred.";
+      actionRequired = sourceIp
+        ? `Block source IP ${sourceIp} on edge firewall/router and verify externally exposed service ports.`
+        : "Verify firewall ingress rules and close any unused exposed ports.";
+      accentColor = "#0284C7";
+    } else if (tt.includes("brute") || tt.includes("ssh") || tt.includes("password")) {
+      whatHappened = "Credential Attack (Brute Force): An automated tool repeatedly attempted password combinations to break into an account.";
+      riskImpact = (severity === "Critical" || severity === "High")
+        ? "High Risk: Rapid repeated authentication attempts detected. Targeted endpoint may be exposed to credential theft."
+        : "Medium Risk: Automated login probes detected and isolated by security rate limiters.";
+      actionRequired = sourceIp
+        ? `Block attacker IP ${sourceIp}, enforce SSH key authentication, and verify that strong passwords/MFA are active.`
+        : "Enforce multi-factor authentication (MFA) and lock accounts after successive failed attempts.";
+      accentColor = severity === "Critical" ? "#DC2626" : "#EA580C";
+    } else if (tt.includes("sql") || tt.includes("database")) {
+      whatHappened = "Database Attack (SQL Injection): Malicious SQL commands were injected into web inputs attempting to view or alter database records.";
+      riskImpact = "High Risk: Attacker attempted to bypass application logic and extract sensitive backend database information.";
+      actionRequired = "Sanitize all web form inputs, enforce parameterized queries/prepared statements, and blacklist the origin IP.";
+      accentColor = "#DC2626";
+    } else if (tt.includes("command") || tt.includes("rce") || tt.includes("interpreter")) {
+      whatHappened = "Remote Command Execution (RCE): An attacker attempted to run arbitrary operating system commands directly in the server shell.";
+      riskImpact = "Critical Risk: Unauthorized shell interaction attempt. Potential complete server compromise if left uncontained.";
+      actionRequired = "Immediately isolate affected service container, terminate unauthorized shell processes, and inspect system integrity.";
+      accentColor = "#DC2626";
+    } else if (tt.includes("xss") || tt.includes("script")) {
+      whatHappened = "Cross-Site Scripting (XSS): Malicious client-side JavaScript code was injected into web requests to hijack user sessions.";
+      riskImpact = "Medium Risk: Client-side exploit attempt aiming to compromise user browser sessions and cookies.";
+      actionRequired = "Implement strict Content Security Policy (CSP) headers and encode dynamic user outputs before HTML rendering.";
+      accentColor = "#D97706";
+    } else {
+      whatHappened = `Security Event Detected (${primaryThreat.threatType}): Automated signatures matched suspicious network or application behavior.`;
+      riskImpact = `${severity} Risk: Evaluated with ${primaryThreat.confidence || 85}% detection confidence.`;
+      actionRequired = sourceIp
+        ? `Review telemetry from source IP ${sourceIp} and apply perimeter firewall access controls if unauthorized.`
+        : "Review associated application logs and follow standard incident triage procedures.";
+      accentColor = severity === "Critical" ? "#DC2626" : (severity === "High" ? "#EA580C" : "#0284C7");
+    }
+
+    return { whatHappened, riskImpact, actionRequired, accentColor };
+  }
+
+  /**
    * Generates a PDF stream and pipes it to the response
    * @param {Object} reportData - Object containing report, log, threats, incidents, user
    * @param {Object} res - Express response stream
@@ -248,7 +316,7 @@ class PdfReportService {
     doc.y = cardY + cardHeight + 10;
 
     // =========================================================================
-    // 3. EXECUTIVE SUMMARY
+    // 3. EXECUTIVE SUMMARY & DIRECT CLARITY CALLOUT
     // =========================================================================
     drawSectionHeader("1. Executive Summary");
 
@@ -268,6 +336,64 @@ class PdfReportService {
       });
 
     doc.y = doc.y + 8;
+
+    // DIRECT SOC IMPACT & ACTION CALLOUT BOX (PLAIN LANGUAGE OVERVIEW)
+    const plain = PdfReportService.getPlainLanguageSummary(threats);
+    const boxPadX = 12;
+    const boxPadY = 8;
+    const directBoxWidth = pageWidth;
+
+    doc.font("Helvetica-Bold").fontSize(8.5);
+    const titleH = doc.heightOfString("DIRECT SOC IMPACT & ACTION (Plain Language Overview)", { width: directBoxWidth - boxPadX * 2 });
+
+    doc.font("Helvetica-Bold").fontSize(8);
+    const labelH = doc.heightOfString("WHAT HAPPENED:", { width: 105 });
+
+    doc.font("Helvetica").fontSize(8);
+    const whatH = doc.heightOfString(plain.whatHappened, { width: directBoxWidth - boxPadX * 2 - 110, lineGap: 1.5 });
+    const riskH = doc.heightOfString(plain.riskImpact, { width: directBoxWidth - boxPadX * 2 - 110, lineGap: 1.5 });
+    const actionH = doc.heightOfString(plain.actionRequired, { width: directBoxWidth - boxPadX * 2 - 110, lineGap: 1.5 });
+
+    const row1H = Math.max(labelH, whatH);
+    const row2H = Math.max(labelH, riskH);
+    const row3H = Math.max(labelH, actionH);
+    const directBoxHeight = boxPadY + titleH + 6 + row1H + 4 + row2H + 4 + row3H + boxPadY;
+
+    ensureSpace(directBoxHeight + 8);
+    const boxY = doc.y;
+
+    // Callout box background and left accent bar
+    doc.rect(leftMargin, boxY, directBoxWidth, directBoxHeight).fill("#F8FAFC");
+    doc.rect(leftMargin, boxY, directBoxWidth, directBoxHeight).lineWidth(0.75).strokeColor("#CBD5E1").stroke();
+    doc.rect(leftMargin, boxY, 4, directBoxHeight).fill(plain.accentColor);
+
+    // Callout title
+    doc
+      .font("Helvetica-Bold")
+      .fontSize(8.5)
+      .fillColor("#0F172A")
+      .text("DIRECT SOC IMPACT & ACTION (Plain Language Overview)", leftMargin + boxPadX, boxY + boxPadY, {
+        width: directBoxWidth - boxPadX * 2,
+        lineBreak: false,
+      });
+
+    let directRowY = boxY + boxPadY + titleH + 6;
+
+    // Row 1: What Happened
+    doc.font("Helvetica-Bold").fontSize(8).fillColor("#334155").text("What Happened:", leftMargin + boxPadX, directRowY, { width: 105 });
+    doc.font("Helvetica").fontSize(8).fillColor("#0F172A").text(plain.whatHappened, leftMargin + boxPadX + 110, directRowY, { width: directBoxWidth - boxPadX * 2 - 110, lineGap: 1.5 });
+    directRowY += row1H + 4;
+
+    // Row 2: Risk & Status
+    doc.font("Helvetica-Bold").fontSize(8).fillColor("#334155").text("Risk & Status:", leftMargin + boxPadX, directRowY, { width: 105 });
+    doc.font("Helvetica").fontSize(8).fillColor("#0F172A").text(plain.riskImpact, leftMargin + boxPadX + 110, directRowY, { width: directBoxWidth - boxPadX * 2 - 110, lineGap: 1.5 });
+    directRowY += row2H + 4;
+
+    // Row 3: Immediate Action
+    doc.font("Helvetica-Bold").fontSize(8).fillColor("#334155").text("Immediate Action:", leftMargin + boxPadX, directRowY, { width: 105 });
+    doc.font("Helvetica-Bold").fontSize(8).fillColor("#0369A1").text(plain.actionRequired, leftMargin + boxPadX + 110, directRowY, { width: directBoxWidth - boxPadX * 2 - 110, lineGap: 1.5 });
+
+    doc.y = boxY + directBoxHeight + 10;
 
     // =========================================================================
     // 4. THREAT TELEMETRY SUMMARY (METRIC GRID)
@@ -347,6 +473,8 @@ class PdfReportService {
         );
 
         drawKeyValue("Threat Type:", threat.threatType, 4);
+        const singlePlain = PdfReportService.getPlainLanguageSummary([threat]);
+        drawKeyValue("Plain Meaning:", singlePlain.whatHappened, 4);
         drawKeyValue("Severity Level:", threat.severity, 4);
         drawKeyValue(
           "Detection Confidence:",
@@ -542,8 +670,11 @@ class PdfReportService {
     // 7. FOOTER & PAGE NUMBERING (ALL BUFFERED PAGES)
     // =========================================================================
     const range = doc.bufferedPageRange();
+    const origBottomMargin = doc.page.margins.bottom;
     for (let i = range.start; i < range.start + range.count; i++) {
       doc.switchToPage(i);
+      // Temporarily clear bottom margin so footer text at page bottom never triggers accidental page breaks
+      doc.page.margins.bottom = 0;
 
       // Footer divider line
       doc
@@ -570,6 +701,8 @@ class PdfReportService {
           align: "right",
           lineBreak: false,
         });
+
+      doc.page.margins.bottom = origBottomMargin;
     }
 
     // Finalize the PDF stream

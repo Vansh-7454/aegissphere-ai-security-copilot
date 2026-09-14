@@ -409,7 +409,7 @@ const classify = async (events = [], stats = {}) => {
     const m = `${(e.message || '').toLowerCase()} ${normalizeText(e.message || e.rawMessage || '')}`;
     return (
       m.includes("nmap") || m.includes("masscan") || m.includes("zmap") || m.includes("angry ip") ||
-      m.includes("port scan") || m.includes("syn scan") || m.includes("sweep") ||
+      m.includes("port scan") || m.includes("port_scan") || m.includes("syn scan") || m.includes("sweep") ||
       m.includes("connection refused on port") || m.includes("closed port probe")
     );
   });
@@ -419,7 +419,7 @@ const classify = async (events = [], stats = {}) => {
     scanEvidence.push("Network reconnaissance scanner signature detected (Nmap/Masscan)");
     scanFactors.push("Known scanner user-agent / signature (+25%)");
   }
-  if (lowerText.includes("port scan") || lowerText.includes("syn scan") || lowerText.includes("sweep")) {
+  if (lowerText.includes("port scan") || lowerText.includes("port_scan") || lowerText.includes("syn scan") || lowerText.includes("sweep")) {
     scanEvidence.push("Synchronous port probe scanning behavior logged");
     scanFactors.push("Sequential probe pattern (+20%)");
   }

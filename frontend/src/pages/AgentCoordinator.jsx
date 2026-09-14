@@ -225,7 +225,7 @@ const AgentCoordinator = () => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
               gap: '16px',
             }}
           >
@@ -236,55 +236,96 @@ const AgentCoordinator = () => {
                   key={idx}
                   className="soc-stat-card"
                   style={{
-                    padding: '24px',
+                    padding: '22px',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    gap: '16px',
+                    gap: '18px',
                   }}
                 >
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        <div
-                          style={{
-                            width: '40px',
-                            height: '40px',
-                            borderRadius: '10px',
-                            background: agent.iconBg,
-                            border: `1px solid ${agent.iconColor}33`,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: agent.iconColor,
-                            flexShrink: 0,
-                          }}
-                        >
-                          <Icon size={20} />
-                        </div>
-                        <div>
-                          <h4 style={{ fontSize: '15px', fontWeight: 800, color: '#0F172A', margin: 0 }}>
-                            {agent.name}
-                          </h4>
-                          <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-                            {agent.role}
-                          </span>
-                        </div>
-                      </div>
-
+                    {/* Top Tier: Role Tag & Active Badge */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '8px',
+                        flexWrap: 'wrap',
+                        marginBottom: '14px',
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: '10.5px',
+                          fontFamily: 'var(--font-mono)',
+                          fontWeight: 700,
+                          color: agent.iconColor,
+                          background: agent.iconBg,
+                          border: `1px solid ${agent.iconColor}33`,
+                          padding: '2px 8px',
+                          borderRadius: 'var(--radius-pill)',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.02em',
+                        }}
+                      >
+                        {agent.role}
+                      </span>
                       <span
                         style={{
                           background: '#DCFCE7',
                           color: '#15803D',
                           border: '1px solid #BBF7D0',
-                          padding: '3px 10px',
+                          padding: '2px 8px',
                           borderRadius: '9999px',
-                          fontSize: '11px',
+                          fontSize: '10.5px',
                           fontWeight: 700,
+                          flexShrink: 0,
                         }}
                       >
-                        {agent.state}
+                        ● {agent.state}
                       </span>
+                    </div>
+
+                    {/* Agent Icon + Title Header */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '12px',
+                        marginBottom: '14px',
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '10px',
+                          background: agent.iconBg,
+                          border: `1px solid ${agent.iconColor}33`,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: agent.iconColor,
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Icon size={20} />
+                      </div>
+                      <div style={{ minWidth: 0, flex: 1 }}>
+                        <h4
+                          style={{
+                            fontSize: '15px',
+                            fontWeight: 800,
+                            color: '#0F172A',
+                            margin: 0,
+                            lineHeight: 1.3,
+                            wordBreak: 'break-word',
+                          }}
+                        >
+                          {agent.name}
+                        </h4>
+                      </div>
                     </div>
 
                     <p style={{ fontSize: '12.5px', color: 'var(--text-secondary)', lineHeight: '1.55', marginBottom: '14px' }}>
@@ -310,20 +351,39 @@ const AgentCoordinator = () => {
                     </div>
                   </div>
 
+                  {/* Clean Dedicated Engine Info Footer */}
                   <div
                     style={{
-                      paddingTop: '14px',
+                      paddingTop: '12px',
                       borderTop: '1px solid rgba(186, 230, 253, 0.65)',
                       display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      fontSize: '11px',
-                      color: 'var(--text-muted)',
-                      fontFamily: 'var(--font-mono)',
+                      flexDirection: 'column',
+                      gap: '4px',
                     }}
                   >
-                    <span style={{ fontWeight: 700, color: '#0284C7' }}>ENGINE</span>
-                    <span style={{ color: '#0F172A', fontWeight: 700 }}>{agent.engine}</span>
+                    <span
+                      style={{
+                        fontSize: '10px',
+                        fontWeight: 800,
+                        color: '#0284C7',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.06em',
+                        fontFamily: 'var(--font-mono)',
+                      }}
+                    >
+                      EXECUTION ENGINE
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '12px',
+                        color: '#0F172A',
+                        fontWeight: 700,
+                        fontFamily: 'var(--font-mono)',
+                        wordBreak: 'break-word',
+                      }}
+                    >
+                      {agent.engine}
+                    </span>
                   </div>
                 </div>
               );

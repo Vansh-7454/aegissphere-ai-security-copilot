@@ -33,8 +33,8 @@ const WhyAegisSphere = () => {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '20px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+          gap: 'clamp(16px, 2vw, 24px)',
         }}
       >
         {/* Challenges */}

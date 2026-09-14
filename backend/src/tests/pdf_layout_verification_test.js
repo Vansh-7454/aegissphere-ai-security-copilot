@@ -16,8 +16,11 @@ const mongoose = require("mongoose");
 const fs = require("fs");
 const path = require("path");
 const PdfReportService = require("../services/PdfReportService");
+const dotenv = require("dotenv");
 
-const MONGO_URI = "mongodb://127.0.0.1:27017/aegissphere";
+dotenv.config({ path: path.join(__dirname, "../../.env") });
+
+const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/aegissphere";
 const OUTPUT_DIR = path.resolve(__dirname, "../../test_output/pdf_layout_audits");
 
 const extractAllPdfText = (buffer) => {

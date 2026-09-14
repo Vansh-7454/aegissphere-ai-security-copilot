@@ -96,30 +96,30 @@ const HeroSection = () => {
         </div>
 
         {/* Inner Mockup with Light Blue Sidebar + Card Surfaces */}
-        <div style={{ display: 'flex', minHeight: '340px', background: 'linear-gradient(135deg, #F8FCFE 0%, #F0F9FF 100%)' }}>
+        <div className="mockup-body">
           {/* Left Light Sidebar Rail */}
-          <div style={{ width: '130px', background: '#FFFFFF', padding: '14px 10px', display: 'flex', flexDirection: 'column', gap: '10px', flexShrink: 0, borderRight: '1px solid rgba(186, 230, 253, 0.75)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', paddingBottom: '10px', borderBottom: '1px solid rgba(186, 230, 253, 0.6)' }}>
-              <div style={{ width: '22px', height: '22px', borderRadius: '6px', background: 'linear-gradient(135deg, #0284C7 0%, #06B6D4 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF' }}>
+          <div className="mockup-sidebar">
+            <div className="mockup-sidebar-header">
+              <div className="mockup-brand-badge">
                 <Shield size={12} />
               </div>
               <span style={{ fontSize: '11px', fontWeight: 800, color: '#0F172A' }}>AegisSphere</span>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '4px' }}>
-              <div style={{ background: '#E0F2FE', color: '#0284C7', padding: '5px 8px', borderRadius: '6px', fontSize: '10.5px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '5px', border: '1px solid #BAE6FD' }}>
+            <div className="mockup-sidebar-nav">
+              <div className="mockup-nav-active">
                 <LayoutDashboard size={11} />
                 <span>Overview</span>
               </div>
-              <div style={{ color: '#475569', padding: '4px 8px', fontSize: '10px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <div className="mockup-nav-item">
                 <FileText size={10} />
                 <span>Logs</span>
               </div>
-              <div style={{ color: '#475569', padding: '4px 8px', fontSize: '10px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <div className="mockup-nav-item">
                 <ShieldAlert size={10} />
                 <span>Threats</span>
               </div>
-              <div style={{ color: '#475569', padding: '4px 8px', fontSize: '10px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <div className="mockup-nav-item">
                 <Search size={10} />
                 <span>Forensics</span>
               </div>
@@ -127,8 +127,8 @@ const HeroSection = () => {
           </div>
 
           {/* Right Console Content Area */}
-          <div style={{ flex: 1, padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div className="mockup-content">
+            <div className="mockup-content-header">
               <div>
                 <h4 style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A', margin: 0 }}>SOC Telemetry</h4>
                 <span style={{ fontSize: '10px', color: '#64748B' }}>Live Platform Overview</span>
@@ -140,8 +140,8 @@ const HeroSection = () => {
             </div>
 
             {/* KPI Cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
-              <div style={{ background: '#FFFFFF', borderRadius: '10px', padding: '8px 10px', border: '1px solid rgba(186, 230, 253, 0.75)', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.02)' }}>
+            <div className="mockup-kpi-grid">
+              <div className="mockup-kpi-card">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2px' }}>
                   <span style={{ fontSize: '9.5px', color: '#64748B', fontWeight: 600 }}>Total Logs</span>
                   <span style={{ fontSize: '8.5px', color: '#15803D', fontWeight: 700 }}>Real-time</span>
@@ -151,7 +151,7 @@ const HeroSection = () => {
                 </strong>
               </div>
 
-              <div style={{ background: '#FFFFFF', borderRadius: '10px', padding: '8px 10px', border: '1px solid rgba(186, 230, 253, 0.75)', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.02)' }}>
+              <div className="mockup-kpi-card">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2px' }}>
                   <span style={{ fontSize: '9.5px', color: '#64748B', fontWeight: 600 }}>Threats Detected</span>
                   <span style={{ fontSize: '8.5px', color: '#DC2626', fontWeight: 700 }}>Active</span>
@@ -161,7 +161,7 @@ const HeroSection = () => {
                 </strong>
               </div>
 
-              <div style={{ background: '#FFFFFF', borderRadius: '10px', padding: '8px 10px', border: '1px solid rgba(186, 230, 253, 0.75)', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.02)' }}>
+              <div className="mockup-kpi-card">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2px' }}>
                   <span style={{ fontSize: '9.5px', color: '#64748B', fontWeight: 600 }}>Open Incidents</span>
                   <span style={{ fontSize: '8.5px', color: '#0284C7', fontWeight: 700 }}>Active</span>
@@ -173,7 +173,7 @@ const HeroSection = () => {
             </div>
 
             {/* Recent Threats Table Mockup */}
-            <div style={{ background: '#FFFFFF', borderRadius: '10px', padding: '10px', border: '1px solid rgba(186, 230, 253, 0.75)', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.02)' }}>
+            <div className="mockup-table-box">
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px', fontSize: '10px', fontWeight: 700, color: '#0F172A' }}>
                 <span>Recent Platform Detections</span>
                 <span style={{ color: '#0284C7', fontSize: '9.5px' }}>Live Telemetry</span>

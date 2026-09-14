@@ -10,9 +10,12 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 const fs = require("fs");
 const { execSync } = require("child_process");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 const API_BASE = "http://127.0.0.1:5000/api";
-const MONGO_URI = "mongodb://127.0.0.1:27017/aegissphere";
+const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/aegissphere";
 
 const Log = require("../models/Log");
 const Threat = require("../models/Threat");
